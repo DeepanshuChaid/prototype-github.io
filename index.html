@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Table with PDF Download</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        td[contenteditable="true"]:hover {
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td contenteditable="true">John Doe</td>
+                <td contenteditable="true">30</td>
+                <td contenteditable="true">New York</td>
+            </tr>
+            <tr>
+                <td contenteditable="true">Jane Smith</td>
+                <td contenteditable="true">25</td>
+                <td contenteditable="true">Los Angeles</td>
+            </tr>
+        </tbody>
+    </table>
 
+    <button onclick="generatePDF()">Download PDF</button>
+
+    <script src="/jspdf.umd.min.js"></script>
+    <script src="/jspdf.plugin.autotable.min.js"></script>   
+    
+    <script>
+        function generatePDF() {
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const table = document.getElementById('myTable');
+                const rows = table.querySelectorAll('tr');
+                let rowData = [];
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('th, td');
+                    const rowArray = [];
+                    cells.forEach(cell => rowArray.push(cell.innerText || ''));
+                    rowData.push(rowArray);
+                });
+
+                doc.autoTable({
+                    head: [rowData[0]],
+                    body: rowData.slice(1),
+                    theme: 'grid',
+                    styles: { fontSize: 12, cellPadding: 5 },
+                    headStyles: { fillColor: [76, 175, 80], textColor: [255, 255, 255] }
+                });
+
+                doc.save('table.pdf');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to generate PDF. Check your internet connection or console for details.');
+            }
+        }
+    </script>
+</body>
+</html>
