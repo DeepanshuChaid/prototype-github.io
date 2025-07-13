@@ -1696,8 +1696,6 @@
       letter-spacing: -0.015em;
       
       color: #BABABA;
-
-
     }
     
   </style>
@@ -1707,7 +1705,7 @@
   <div id="pdf-capture">
     <div class="pdf">
 
-      <img src="https://via.placeholder.com/400x100.png?.text=LOGO" class="image" />
+      <img src="https://via.placeholder.com/400x100.png" class="image" alt="logo" />
       <div class="card">
         <div class="card-innerContent">
           <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1897,7 +1895,7 @@
         html2pdf()
           .set({
             margin: 0,
-            filename: 'cbse-result.pdf',
+            filename: 'cbse-result-thml.pdf',
             image: { type: 'jpeg', quality: 1 },
             html2canvas: {
               scale: window.devicePixelRatio || 2,
