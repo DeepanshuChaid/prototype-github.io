@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>pdf-saas</title>
-  <link
-  href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap"
-  rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style type="text/css" media="all">
     * {
       padding: 0;
@@ -1707,7 +1707,7 @@
   <div id="pdf-capture">
     <div class="pdf">
       
-      <img src="https://via.placeholder.com/150" class="image" alt="logo" />
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..." class="image" alt="logo" />
       <div class="card">
         <div class="card-innerContent">
           <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1854,55 +1854,78 @@
   
   <script>
   function downloadAsPDF() {
-    const original = document.querySelector('.pdf');
-    const cloned = original.cloneNode(true);
+  const original = document.querySelector('.pdf');
+  const cloned = original.cloneNode(true);
 
-    cloned.style.width = '1275px';
-    cloned.style.height = '1650px';
-    cloned.style.position = 'absolute';
-    cloned.style.left = '-9999px';
-    cloned.style.top = '0';
-    cloned.style.zIndex = '-1';
-    cloned.style.background = '#fff';
+  cloned.style.width = '1275px';
+  cloned.style.height = '1650px';
+  cloned.style.position = 'absolute';
+  cloned.style.left = '0';
+  cloned.style.top = '0';
+  cloned.style.visibility = 'hidden'; // Hide instead of moving off-screen
+  cloned.style.background = '#fff';
 
-    document.body.appendChild(cloned);
+  document.body.appendChild(cloned);
 
-    // Wait until all images are loaded
-    const imgs = cloned.querySelectorAll("img");
-    const imgPromises = Array.from(imgs).map(img => {
-      return new Promise(resolve => {
-        if (img.complete) return resolve();
-        img.onload = img.onerror = () => resolve();
+  // Wait for images
+  const imgs = cloned.querySelectorAll("img");
+  const imgPromises = Array.from(imgs).map(img => {
+    return new Promise(resolve => {
+      if (img.complete && img.naturalHeight !== 0) {
+        resolve();
+      } else {
+        img.onload = () => resolve();
+        img.onerror = () => {
+          console.error(`Failed to load image: ${img.src}`);
+          resolve(); // Resolve even if image fails to avoid hanging
+        };
+      }
+    });
+  });
+
+  // Wait for fonts
+  const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+
+  Promise.all([...imgPromises, fontPromise]).then(() => {
+    html2pdf()
+    .set({
+      margin: 0,
+      filename: 'cbse-result.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: {
+        scale: 3, // Increase scale for better resolution
+        useCORS: true,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: 1275,
+        windowHeight: 1650
+      },
+    jsPDF: {
+      unit: 'px',
+      format: [1275, 1650],
+      orientation: 'portrait'
+    }
+  }),
+        jsPDF: {
+          unit: 'px',
+          format: [1275, 1650],
+          orientation: 'portrait'
+        }
+      })
+      .from(cloned)
+      .save()
+      .then(() => {
+        document.body.removeChild(cloned);
+      })
+      .catch(err => {
+        console.error('PDF generation failed:', err);
+        document.body.removeChild(cloned);
       });
-    });
-
-    // Wait for fonts too
-    const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
-
-    Promise.all([...imgPromises, fontPromise]).then(() => {
-      html2pdf()
-        .set({
-          margin: 0,
-          filename: 'cbse-result.pdf',
-          image: { type: 'jpeg', quality: 1 },
-          html2canvas: {
-            scale: 2.5,
-            useCORS: true,
-            scrollY: 0
-          },
-          jsPDF: {
-            unit: 'px',
-            format: [1275, 1650],
-            orientation: 'portrait'
-          }
-        })
-        .from(cloned)
-        .save()
-        .then(() => {
-          document.body.removeChild(cloned);
-        });
-    });
-  }
+  }).catch(err => {
+    console.error('Error loading resources:', err);
+    document.body.removeChild(cloned);
+  });
+}
 </script>
 
   
