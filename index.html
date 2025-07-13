@@ -1854,77 +1854,105 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAahn1oxMwbv2zwvdFzmHUQLgH3Lwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     function downloadAsPDF() {
-      const element = document.querySelector('#pdf-capture');
-      const cloned = element.cloneNode(true);
+  const element = document.querySelector('#pdf-capture');
+  const cloned = element.cloneNode(true);
 
-      cloned.style.width = '1275px';
-      cloned.style.height = '1650px';
-      cloned.style.position = 'absolute';
-      cloned.style.left = '0';
-      cloned.style.top = '0';
-      cloned.style.zIndex = '1000';
-      cloned.style.background = '#fff';
-      cloned.style.display = 'block';
-      cloned.style.visibility = 'visible';
+  cloned.style.width = '1275px';
+  cloned.style.height = '1650px';
+  cloned.style.position = 'absolute';
+  cloned.style.left = '0';
+  cloned.style.top = '0';
+  cloned.style.zIndex = '1000';
+  cloned.style.background = '#fff';
+  cloned.style.display = 'block';
+  cloned.style.visibility = 'visible';
 
-      document.body.appendChild(cloned);
+  document.body.appendChild(cloned);
 
-      const imgs = cloned.querySelectorAll("img");
-      const imgPromises = Array.from(imgs).map(img => {
-        return new Promise(resolve => {
-          if (img.complete && img.naturalHeight !== 0) {
-            console.log('Image loaded:', img.src);
-            resolve();
-          } else {
-            img.onload = () => {
-              console.log('Image loaded:', img.src);
-              resolve();
-            };
-            img.onerror = () => {
-              console.error('Image failed to load:', img.src);
-              resolve();
-            };
-          }
+  const imgs = cloned.querySelectorAll("img");
+  const imgPromises = Array.from(imgs).map(img => {
+    return new Promise((resolve, reject) => {
+      if (img.complete && img.naturalHeight !== 0) {
+        console.log('Image loaded:', img.src);
+        resolve();
+      } else {
+        img.crossOrigin = 'Anonymous'; // Enable CORS for external images
+        img.onload = () => {
+          console.log('Image loaded:', img.src);
+          resolve();
+        };
+        img.onerror = () => {
+          console.error('Image failed to load:', img.src);
+          resolve(); // Continue to avoid blocking
+        };
+      }
+    });
+  });
+
+  const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+  fontPromise.then(() => console.log('Fonts loaded')).catch(err => {
+    console.error('Font loading failed:', err);
+    resolve(); // Continue to avoid blocking
+  });
+
+  Promise.all([...imgPromises, fontPromise])
+    .then(() => {
+      console.log('All resources loaded, generating PDF...');
+      html2canvas(cloned, {
+        useCORS: true,
+        scale: 1,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: 1275,
+        windowHeight: 1650,
+        logging: true
+      }).then(canvas => {
+        document.body.appendChild(canvas); // Debug: comment out after testing
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          unit: 'px',
+          format: [1275, 1650],
+          orientation: 'portrait'
         });
+        pdf.addImage(imgData, 'JPEG', 0, 0, 1275, 1650);
+        pdf.save('cbse-result.pdf');
+        document.body.removeChild(cloned);
+      }).catch(err => {
+        console.error('PDF generation failed:', err);
+        alert('Failed to generate PDF. Check console for details.');
+        document.body.removeChild(cloned);
       });
-
-      const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
-      fontPromise.then(() => console.log('Fonts loaded')).catch(err => console.error('Font loading failed:', err));
-
-      Promise.all([...imgPromises, fontPromise])
-        .then(() => {
-          console.log('All resources loaded, generating PDF...');
-          html2canvas(cloned, {
-            useCORS: true,
-            scale: 1,
-            scrollX: 0,
-            scrollY: 0,
-            windowWidth: 1275,
-            windowHeight: 1650,
-            logging: true
-          }).then(canvas => {
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF({
-              unit: 'px',
-              format: [1275, 1650],
-              orientation: 'portrait'
-            });
-            pdf.addImage(imgData, 'JPEG', 0, 0, 1275, 1650);
-            pdf.save('cbse-result.pdf');
-            document.body.removeChild(cloned);
-          }).catch(err => {
-            console.error('PDF generation failed:', err);
-            alert('Failed to generate PDF. Check console for details.');
-            document.body.removeChild(cloned);
-          });
-        })
-        .catch(err => {
-          console.error('Resource loading failed:', err);
-          alert('Failed to generate PDF due to resource loading issues.');
-          document.body.removeChild(cloned);
+    })
+    .catch(err => {
+      console.error('Resource loading failed:', err);
+      alert('Failed to generate PDF due to resource loading issues. Using fallback rendering.');
+      html2canvas(cloned, {
+        useCORS: true,
+        scale: 1,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: 1275,
+        windowHeight: 1650,
+        logging: true
+      }).then(canvas => {
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          unit: 'px',
+          format: [1275, 1650],
+          orientation: 'portrait'
         });
-    }
+        pdf.addImage(imgData, 'JPEG', 0, 0, 1275, 1650);
+        pdf.save('cbse-result.pdf');
+        document.body.removeChild(cloned);
+      }).catch(err => {
+        console.error('Fallback PDF generation failed:', err);
+        alert('Failed to generate PDF. Check console for details.');
+        document.body.removeChild(cloned);
+      });
+    });
+}
   </script>
 
   
