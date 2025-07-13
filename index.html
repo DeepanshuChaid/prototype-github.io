@@ -1706,7 +1706,8 @@
 
   <div id="pdf-capture">
     <div class="pdf">
-      
+
+      <img src="https://via.placeholder.com/400x100.png?.text=LOGO"/>
       <div class="card">
         <div class="card-innerContent">
           <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1853,70 +1854,80 @@
   
   <script>
   function downloadAsPDF() {
-  const original = document.querySelector('.pdf');
-  const cloned = original.cloneNode(true);
+    const original = document.querySelector('.pdf');
+    const cloned = original.cloneNode(true);
 
-  cloned.style.width = '1275px';
-  cloned.style.height = '1650px';
-  cloned.style.position = 'absolute';
-  cloned.style.left = '0';
-  cloned.style.top = '0';
-  cloned.style.visibility = 'hidden';
-  cloned.style.background = '#fff';
+    // Styles for PDF rendering
+    cloned.style.width = '1275px';
+    cloned.style.height = '1650px';
+    cloned.style.position = 'absolute';
+    cloned.style.left = '0';
+    cloned.style.top = '0';
+    cloned.style.zIndex = '-1';
+    cloned.style.display = 'none';
+    cloned.style.background = '#fff';
 
-  document.body.appendChild(cloned);
+    document.body.appendChild(cloned);
 
-  const imgs = cloned.querySelectorAll("img");
-  const imgPromises = Array.from(imgs).map(img => {
-    return new Promise(resolve => {
-      if (img.complete && img.naturalHeight !== 0) {
-        resolve();
-      } else {
-        img.onload = () => resolve();
-        img.onerror = () => {
-          console.error(`Failed to load image: ${img.src}`);
+    // Wait for images to load
+    const imgs = cloned.querySelectorAll("img");
+    const imgPromises = Array.from(imgs).map(img => {
+      return new Promise(resolve => {
+        if (img.complete && img.naturalHeight !== 0) {
           resolve();
-        };
-      }
-    });
-  });
-
-  const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
-
-  Promise.all([...imgPromises, fontPromise]).then(() => {
-    html2pdf()
-      .set({
-        margin: 0,
-        filename: 'cbse-result.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: {
-          scale: 3,
-          useCORS: true,
-          scrollX: 0,
-          scrollY: 0,
-          windowWidth: 1275,
-          windowHeight: 1650
-        },
-        jsPDF: {
-          unit: 'px',
-          format: [1275, 1650],
-          orientation: 'portrait'
+        } else {
+          img.onload = () => resolve();
+          img.onerror = () => {
+            console.error(`Failed to load image: ${img.src}`);
+            resolve();
+          };
         }
-      })
-      .from(cloned)
-      .save()
-      .then(() => {
-        document.body.removeChild(cloned);
-      })
-      .catch(err => {
-        console.error('PDF generation failed:', err);
-        document.body.removeChild(cloned);
       });
-  }).catch(err => {
-    console.error('Error loading resources:', err);
-    document.body.removeChild(cloned);
-  });
-}
+    });
+
+    const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+
+    Promise.all([...imgPromises, fontPromise]).then(() => {
+      // Force layout reflow
+      cloned.style.display = 'block';
+      cloned.offsetHeight;
+
+      // Give it a few ms for some browsers (especially mobile)
+      setTimeout(() => {
+        html2pdf()
+          .set({
+            margin: 0,
+            filename: 'cbse-result.pdf',
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: {
+              scale: window.devicePixelRatio || 2,
+              useCORS: true,
+              scrollX: 0,
+              scrollY: -window.scrollY,
+              windowWidth: 1275,
+              windowHeight: 1650
+            },
+            jsPDF: {
+              unit: 'px',
+              format: [1275, 1650],
+              orientation: 'portrait'
+            }
+          })
+          .from(cloned)
+          .save()
+          .then(() => {
+            document.body.removeChild(cloned);
+          })
+          .catch(err => {
+            console.error('PDF generation failed:', err);
+            document.body.removeChild(cloned);
+          });
+      }, 100);
+    }).catch(err => {
+      console.error('Error loading resources:', err);
+      document.body.removeChild(cloned);
+    });
+  }
 </script>
 
   
