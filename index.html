@@ -1876,7 +1876,7 @@
       } else {
         img.onload = () => resolve();
         img.onerror = () => {
-          console.error(`Failed to load image: ${img.src}`);
+          alert(`Failed to load image: ${img.src}`);
           resolve(); // Resolve even if image fails to avoid hanging
         };
       }
@@ -1918,11 +1918,11 @@
         document.body.removeChild(cloned);
       })
       .catch(err => {
-        console.error('PDF generation failed:', err);
+        alert('PDF generation failed:', err);
         document.body.removeChild(cloned);
       });
   }).catch(err => {
-    console.error('Error loading resources:', err);
+    alert('Error loading resources:', err);
     document.body.removeChild(cloned);
   });
 }
