@@ -7,7 +7,7 @@
   <title>pdf-saas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link ref="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style type="text/css" media="all">
     * {
       padding: 0;
@@ -1850,6 +1850,8 @@
   Download PDF
   </button>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0-alpha.12/html2canvas.min.js" integrity="sha512-N2N4iFnN3A9eGExV2rO0e0vT3nBa3a1tAfFXeTJas3nW35M3I3u8n7DH4NSv+8kPKfVaH4+osNIjAK+1i2p4eQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAahn1oxMwbv2zwvdFzmHUQLgH3Lwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM4pM0rRtu1bS70qXMOZ7NhS1q4A5fyVgo3DIV7RSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
   function downloadAsPDF() {
@@ -1925,7 +1927,7 @@
           console.error('PDF generation failed:', err);
           document.body.removeChild(cloned);
         });
-    }, 8000); // Increased to 8 seconds for safety
+    }, 1000); // Increased to 8 seconds for safety
   }).catch(err => {
     console.error('Resource loading failed:', err);
     document.body.removeChild(cloned);
