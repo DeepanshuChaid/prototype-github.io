@@ -1861,12 +1861,11 @@
   cloned.style.position = 'absolute';
   cloned.style.left = '0';
   cloned.style.top = '0';
-  cloned.style.visibility = 'hidden'; // Hide instead of moving off-screen
+  cloned.style.visibility = 'hidden';
   cloned.style.background = '#fff';
 
   document.body.appendChild(cloned);
 
-  // Wait for images
   const imgs = cloned.querySelectorAll("img");
   const imgPromises = Array.from(imgs).map(img => {
     return new Promise(resolve => {
@@ -1875,36 +1874,29 @@
       } else {
         img.onload = () => resolve();
         img.onerror = () => {
-          alert(`Failed to load image: ${img.src}`);
-          resolve(); // Resolve even if image fails to avoid hanging
+          console.error(`Failed to load image: ${img.src}`);
+          resolve();
         };
       }
     });
   });
 
-  // Wait for fonts
   const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
 
   Promise.all([...imgPromises, fontPromise]).then(() => {
     html2pdf()
-    .set({
-      margin: 0,
-      filename: 'cbse-result.pdf',
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas: {
-        scale: 3, // Increase scale for better resolution
-        useCORS: true,
-        scrollX: 0,
-        scrollY: 0,
-        windowWidth: 1275,
-        windowHeight: 1650
-      },
-    jsPDF: {
-      unit: 'px',
-      format: [1275, 1650],
-      orientation: 'portrait'
-    }
-  }),
+      .set({
+        margin: 0,
+        filename: 'cbse-result.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: {
+          scale: 3,
+          useCORS: true,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 1275,
+          windowHeight: 1650
+        },
         jsPDF: {
           unit: 'px',
           format: [1275, 1650],
@@ -1917,11 +1909,11 @@
         document.body.removeChild(cloned);
       })
       .catch(err => {
-        alert('PDF generation failed:', err);
+        console.error('PDF generation failed:', err);
         document.body.removeChild(cloned);
       });
   }).catch(err => {
-    alert('Error loading resources:', err);
+    console.error('Error loading resources:', err);
     document.body.removeChild(cloned);
   });
 }
