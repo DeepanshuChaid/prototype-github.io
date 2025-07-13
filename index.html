@@ -19,7 +19,7 @@
       position: relative;
       width: 1275px;
       height: 1650px;
-      
+      overflow: hidden;
       background: #FFFFFF;
     }
     
@@ -1848,29 +1848,46 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
   Download PDF
 </button>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
   <script>
   function downloadAsPDF() {
     const element = document.querySelector('.pdf');
 
+    // Force image and fonts to fully load before rendering
     html2pdf()
       .set({
         margin: 0,
         filename: 'cbse-result.pdf',
         image: { type: 'jpeg', quality: 1 },
         html2canvas: {
-          scale: 2.5, // match 150 DPI look
+          scale: 2.5,
           useCORS: true,
+          allowTaint: true,
+          logging: true,
+          scrollY: 0,
+          windowWidth: 1275,
+          windowHeight: 1650,
         },
         jsPDF: {
           unit: 'px',
-          format: [1275, 1650], // 💥 match real CBSE scan size
+          format: [1275, 1650],
           orientation: 'portrait'
-        }
+        },
+        pagebreak: { mode: ['css', 'legacy'] }
       })
       .from(element)
+      .toPdf()
+      .get('pdf')
+      .then(function (pdf) {
+        const totalPages = pdf.internal.getNumberOfPages();
+        if (totalPages > 1) {
+          console.warn('❌ PDF overflowed to extra page');
+        }
+      })
       .save();
   }
 </script>
+
 
 
   
