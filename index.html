@@ -13,6 +13,7 @@
       padding: 0;
       margin: 0;
       box-sizing: border-box;
+      font-family: 'Roboto', Arial, sans-serif;
     }
     
     .pdf {
@@ -1705,7 +1706,7 @@
   <div id="pdf-capture">
     <div class="pdf">
 
-      <img src="https://via.placeholder.com/400x100.png" class="image" alt="logo" />
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYwAAACWCAYAAADWSgM2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADPSURBVHhe7dExAQAwDMCg+/cXfwA/CAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgHX4ABWfcWnQAAAABJRU5ErkJggg==" class="image" alt="logo" />
       <div class="card">
         <div class="card-innerContent">
           <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1855,35 +1856,44 @@
   const original = document.querySelector('#pdf-capture');
   const cloned = original.cloneNode(true);
 
-  // SHOW the cloned div (don’t hide it bruh)
+  // Ensure cloned element is visible and sized correctly
   cloned.style.width = '1275px';
-  cloned.style.minHeight = '1650px';
+  cloned.style.height = '1650px'; // Use fixed height
   cloned.style.position = 'absolute';
   cloned.style.left = '0';
   cloned.style.top = '0';
-  cloned.style.zIndex = '-1';
+  cloned.style.zIndex = '1000'; // Bring to front
   cloned.style.background = '#fff';
-  cloned.style.display = 'block'; // CRUCIAL
-  cloned.style.visibility = 'visible'; // FIXED
+  cloned.style.display = 'block';
+  cloned.style.visibility = 'visible';
 
   document.body.appendChild(cloned);
 
-  // Wait for fonts & images to load
+  // Wait for images and fonts
   const imgs = cloned.querySelectorAll("img");
   const imgPromises = Array.from(imgs).map(img => {
     return new Promise(resolve => {
       if (img.complete && img.naturalHeight !== 0) {
+        console.log('Image loaded:', img.src);
         resolve();
       } else {
-        img.onload = () => resolve();
-        img.onerror = () => resolve(); // Even if it fails, don't block
+        img.onload = () => {
+          console.log('Image loaded:', img.src);
+          resolve();
+        };
+        img.onerror = () => {
+          console.error('Image failed to load:', img.src);
+          resolve(); // Continue even if image fails
+        };
       }
     });
   });
 
   const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+  fontPromise.then(() => console.log('Fonts loaded')).catch(err => console.error('Font loading failed:', err));
 
   Promise.all([...imgPromises, fontPromise]).then(() => {
+    console.log('All resources loaded, generating PDF...');
     setTimeout(() => {
       html2pdf()
         .set({
@@ -1892,11 +1902,12 @@
           image: { type: 'jpeg', quality: 1 },
           html2canvas: {
             useCORS: true,
-            scale: 2,
+            scale: 2, // Higher resolution
             scrollX: 0,
             scrollY: 0,
             windowWidth: 1275,
-            windowHeight: 1650
+            windowHeight: 1650,
+            logging: true // Enable html2canvas logging
           },
           jsPDF: {
             unit: 'px',
@@ -1907,15 +1918,16 @@
         .from(cloned)
         .save()
         .then(() => {
+          console.log('PDF saved successfully');
           document.body.removeChild(cloned);
         })
         .catch(err => {
           console.error('PDF generation failed:', err);
           document.body.removeChild(cloned);
         });
-    }, 5000); // Give extra time for layout
+    }, 8000); // Increased to 8 seconds for safety
   }).catch(err => {
-    console.error('Error loading resources:', err);
+    console.error('Resource loading failed:', err);
     document.body.removeChild(cloned);
   });
 }
