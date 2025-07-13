@@ -1850,7 +1850,7 @@
   Download PDF
   </button>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM4pM0rRtu1bS70qXMOZ7NhS1q4A5fyVgo3DIV7RSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
   function downloadAsPDF() {
   const original = document.querySelector('#pdf-capture');
@@ -1902,7 +1902,7 @@
           image: { type: 'jpeg', quality: 1 },
           html2canvas: {
             useCORS: true,
-            scale: 2, // Higher resolution
+            scale: 1, // Higher resolution
             scrollX: 0,
             scrollY: 0,
             windowWidth: 1275,
