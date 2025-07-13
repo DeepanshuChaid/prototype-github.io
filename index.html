@@ -14,17 +14,12 @@
       margin: 0;
       box-sizing: border-box;
     }
-
-    body {
-      scroll-behavior: auto;
-    }
-      
     
     .pdf {
       position: relative;
       width: 1275px;
       height: 1650px;
-      overflow: hidden;
+      overflow: visible;
       background: #FFFFFF;
     }
     
@@ -1562,6 +1557,7 @@
       align-items: center;
       padding: 0px;
       gap: 323px;
+      font-family: 'Roboto';
       
       width: 810px;
       height: 19px;
@@ -1711,7 +1707,7 @@
   <div id="pdf-capture">
     <div class="pdf">
       
-      <img src="/image-logo-typeshit.png" class="image" alt="logo" />
+      <img src="https://via.placeholder.com/150" class="image" alt="logo" />
       <div class="card">
         <div class="card-innerContent">
           <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1857,50 +1853,58 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   
   <script>
-      function downloadAsPDF() {
-        const original = document.querySelector('.pdf');
-        
-        // Clone the .pdf content
-        const cloned = original.cloneNode(true);
-        cloned.style.width = '1275px';
-        cloned.style.height = '1650px';
-        cloned.style.position = 'absolute';
-        cloned.style.left = '-9999px';
-        cloned.style.top = '0';
-        cloned.style.zIndex = '-1';
-        cloned.style.overflow = 'hidden';
-        cloned.style.background = '#fff';
-    
-        // Append off-screen
-        document.body.appendChild(cloned);
-    
-        html2pdf()
-          .set({
-            margin: 0,
-            filename: 'cbse-result.pdf',
-            image: { type: 'jpeg', quality: 1 },
-            html2canvas: {
-              scale: 2.5,
-              useCORS: true,
-              scrollY: 0,
-              windowWidth: 1275,
-              windowHeight: 1650,
-            },
-            jsPDF: {
-              unit: 'px',
-              format: [1275, 1650],
-              orientation: 'portrait'
-            },
-            pagebreak: { mode: ['css', 'legacy'] }
-          })
-          .from(cloned)
-          .save()
-          .then(() => {
-            // Remove cloned element after save
-            document.body.removeChild(cloned);
-          });
-      }
-    </script>
+  function downloadAsPDF() {
+    const original = document.querySelector('.pdf');
+    const cloned = original.cloneNode(true);
+
+    cloned.style.width = '1275px';
+    cloned.style.height = '1650px';
+    cloned.style.position = 'absolute';
+    cloned.style.left = '-9999px';
+    cloned.style.top = '0';
+    cloned.style.zIndex = '-1';
+    cloned.style.background = '#fff';
+
+    document.body.appendChild(cloned);
+
+    // Wait until all images are loaded
+    const imgs = cloned.querySelectorAll("img");
+    const imgPromises = Array.from(imgs).map(img => {
+      return new Promise(resolve => {
+        if (img.complete) return resolve();
+        img.onload = img.onerror = () => resolve();
+      });
+    });
+
+    // Wait for fonts too
+    const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+
+    Promise.all([...imgPromises, fontPromise]).then(() => {
+      html2pdf()
+        .set({
+          margin: 0,
+          filename: 'cbse-result.pdf',
+          image: { type: 'jpeg', quality: 1 },
+          html2canvas: {
+            scale: 2.5,
+            useCORS: true,
+            scrollY: 0
+          },
+          jsPDF: {
+            unit: 'px',
+            format: [1275, 1650],
+            orientation: 'portrait'
+          }
+        })
+        .from(cloned)
+        .save()
+        .then(() => {
+          document.body.removeChild(cloned);
+        });
+    });
+  }
+</script>
+
   
 </body>
 </html>
