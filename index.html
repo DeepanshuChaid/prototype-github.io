@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style type="text/css" media="all">
     * {
       padding: 0;
@@ -1849,7 +1848,8 @@
   <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">
   Download PDF
   </button>
-  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
   function downloadAsPDF() {
     const original = document.querySelector('#pdf-capture');
@@ -1859,10 +1859,10 @@
     cloned.style.width = '1275px';
     cloned.style.height = '1650px';
     cloned.style.position = 'absolute';
+    cloned.style.visibility = "hidden";
     cloned.style.left = '0';
     cloned.style.top = '0';
     cloned.style.zIndex = '-1';
-    cloned.style.display = 'none';
     cloned.style.background = '#fff';
 
     document.body.appendChild(cloned);
@@ -1898,7 +1898,6 @@
             filename: 'cbse-result-thml.pdf',
             image: { type: 'jpeg', quality: 1 },
             html2canvas: {
-              scale: window.devicePixelRatio || 2,
               useCORS: true,
               scrollX: 0,
               scrollY: -window.scrollY,
