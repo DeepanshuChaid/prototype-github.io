@@ -1847,34 +1847,32 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
   <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">
   Download PDF
 </button>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-YcsIPx6OHe6u2CmnxDFJrD7fN2tI/hODe2bWZGV3n8FnhmyY+uRnpg1pmSXRM1E2gCnliFZqPZzTxlg6R7k1mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
-  <script>
-    function downloadAsPDF() {
-      const element = document.getElementById("pdf-capture");
-  
-      // Scroll to top so it captures everything
-      window.scrollTo(0, 0);
-  
-      html2pdf()
-        .set({
-          filename: 'cbse-result.pdf',
-          image: { type: 'jpeg', quality: 1 },
-          html2canvas: {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: "#ffffff"
-          },
-          jsPDF: {
-            unit: 'pt',
-            format: 'a4',
-            orientation: 'portrait'
-          }
-        })
-        .from(element)
-        .save();
-    }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaLbY3RUM3+96dy7HAGY1w0kVq+5Vc1k5AYku0BdZwzv3dE7Fceap8N4W9fPtKOcCW0rUC9yZMPbV8l6UOK2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-2Tbn7gPgV0yhzW7vI8j/VCnrs7tZChQpvMZpVbpBDMgzQo2zV+1WoRHEcTSjE+xA9UapHx/k8WmwkU0Upzmkxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  async function downloadAsPDF() {
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById('pdf-capture');
+
+    // Make sure we scroll to top before capture
+    window.scrollTo(0, 0);
+
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#fff",
+    });
+
+    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('cbse-result.pdf');
+  }
+</script>
 
 
 
