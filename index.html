@@ -1704,7 +1704,7 @@
   <div id="pdf-capture">
   <div class="pdf">
     
-    <img src="/image-logo-typeshit.png" class="image" alt="logo" />
+    <img src="/image-logo-typeshit.png" class="image" alt="logo" crossorigin="anonymous" />
     <div class="card">
       <div class="card-innerContent">
         <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1851,7 +1851,10 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
   <script>
     function downloadAsPDF() {
       const element = document.querySelector('.pdf');
-    
+  
+      // scroll to top to avoid partial capture
+      window.scrollTo(0, 0);
+  
       html2pdf().set({
         margin: 0,
         filename: 'cbse-result.pdf',
@@ -1859,10 +1862,8 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
         html2canvas: {
           scale: 2,
           useCORS: true,
-          scrollY: 0,
-          backgroundColor: null,
-          windowWidth: 1275, // important fix
-          windowHeight: 1650,
+          letterRendering: true,
+          backgroundColor: null
         },
         jsPDF: {
           unit: 'px',
@@ -1872,6 +1873,7 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
       }).from(element).save();
     }
   </script>
+
 
 
   
