@@ -1701,7 +1701,7 @@
 </head>
 <body>
 
-
+  <div id="pdf-capture">
   <div class="pdf">
     
     <img src="/image-logo-typeshit.png" class="image" alt="logo" />
@@ -1842,13 +1842,15 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
     </div>
     <p class="under-text">This site designed, developed and hosted by National informatics Centre, Ministry of Electronics & Information Technology, Governmnnt of India.</p>
   </div>
+  </div>
+  
   <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">
   Download PDF
 </button>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
   function downloadAsPDF() {
-    const element = document.querySelector('.pdf');
+    const element = document.querySelector('#pdf-capture');
     element.scrollIntoView({ behavior: 'instant', block: 'start' });
   
     setTimeout(() => {
