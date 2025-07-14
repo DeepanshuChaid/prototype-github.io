@@ -1850,7 +1850,7 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     function downloadAsPDF() {
-      const element = document.getElementById('pdf-capture');
+      const element = document.querySelector('.pdf');
     
       html2pdf().set({
         margin: 0,
@@ -1862,6 +1862,7 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
           scrollY: 0,
           backgroundColor: null,
           windowWidth: 1275, // important fix
+          windowHeight: 1650;
         },
         jsPDF: {
           unit: 'px',
