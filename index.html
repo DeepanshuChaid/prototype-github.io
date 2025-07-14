@@ -1709,7 +1709,7 @@
   <div id="pdf-capture">
     <div class="pdf">
 
-      
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." alt="logo" class="image" />
       <div class="card">
         <div class="card-innerContent">
           <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
@@ -1878,12 +1878,8 @@
         if (img.complete && img.naturalHeight !== 0) {
           resolve();
         } else {
-          img.crossOrigin = 'Anonymous';
           img.onload = () => resolve();
-          img.onerror = () => {
-            console.error('Image failed:', img.src);
-            resolve(); // Don't block
-          };
+          img.onerror = () => resolve();
         }
       });
     });
