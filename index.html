@@ -1843,47 +1843,31 @@ treated as original mark sheets. Original mark sheets have been issued by the Bo
     <p class="under-text">This site designed, developed and hosted by National informatics Centre, Ministry of Electronics & Information Technology, Governmnnt of India.</p>
   </div>
   </div>
-  
-  <!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaLbY3RUM3+96dy7HAGY1w0kVq+5Vc1k5AYku0BdZwzv3dE7Fceap8N4W9fPtKOcCW0rUC9yZMPbV8l6UOK2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-2Tbn7gPgV0yhzW7vI8j/VCnrs7tZChQpvMZpVbpBDMgzQo2zV+1WoRHEcTSjE+xA9UapHx/k8WmwkU0Upzmkxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
+  Download PDF  
+</button>  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- Button -->
-<button onclick="downloadAsPDF()" style="padding: 10px 20px; background: #333; color: white; font-weight: bold;">Download PDF</button>
-
-<!-- Script -->
 <script>
   async function downloadAsPDF() {
     const { jsPDF } = window.jspdf;
-    const target = document.getElementById('pdf-capture');
+    const el = document.getElementById("pdf-capture");
     
-    if (!target) {
-      alert("Target element not found!");
-      return;
-    }
+    window.scrollTo(0, 0); // Ensure nothing’s cut
+    const canvas = await html2canvas(el, {
+      scale: 2,
+      useCORS: true
+    });
 
-    window.scrollTo(0, 0); // force view to top before capture
+    const imgData = canvas.toDataURL("image/jpeg", 1.0);
+    const pdf = new jsPDF("p", "mm", "a4");
+    const width = pdf.internal.pageSize.getWidth();
+    const height = (canvas.height * width) / canvas.width;
 
-    try {
-      const canvas = await html2canvas(target, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#fff"
-      });
-
-      const imgData = canvas.toDataURL('image/jpeg', 1.0);
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save('cbse-result.pdf');
-    } catch (err) {
-      console.error('PDF download failed:', err);
-      alert('Failed to generate PDF. Check console for errors.');
-    }
+    pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+    pdf.save("cbse-result.pdf");
   }
 </script>
-
 </body>
 </html>
