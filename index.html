@@ -43,6 +43,15 @@
       border-radius: 14px;
 
     }
+
+    .card-pdf {
+      position: absolute;
+      width: 840px;
+      height: 840px;
+      left: 236px;
+      top: 291px;
+      border-radius: 14px;
+    }
     
     .card-innerContent {
       display: flex;
@@ -1729,33 +1738,16 @@
       
       color: #BABABA;
     }
-
-    .card-shadow {
-      position: absolute;
-      width: 840px;
-      height: 840px;
-      left: 236px;
-      top: 291px;
-      border-radius: 14px;
-    
-      /* Exact shadow copy */
-      box-shadow: 
-        6px 4px 34px rgba(0, 0, 0, 0.09), 
-        0px 20px 33px rgba(0, 0, 0, 0.09);
-    
-      background: transparent; /* Make sure it's invisible */
-      z-index: 0;
-    }
     
   </style>
 </head>
 <body>
 
   <div id="pdf-capture">
-  <div class="pdf">
+    <div class="pdf">
     
     <img src="./image-logo-typeshit.png" class="image" alt="logo" crossorigin="anonymous" />
-    <div class="card-shadow" ></div>
+    <img src="./card.png" class="card-pdf" alt="shadow"/>
     <div class="card">
       <div class="card-innerContent">
         <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
