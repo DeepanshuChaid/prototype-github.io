@@ -4,1896 +4,1008 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>pdf-saas</title>
   <link
-  href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap"
   rel="stylesheet">
-  <style type="text/css" media="all">
+  <title>feature-1</title>
+  <style>
     * {
       padding: 0;
       margin: 0;
-      font-family: 'Roboto', Arial;
+      box-sizing: border-box;
     }
     
-    .pdf {
-      position: relative;
+    .pdf-capture {
       width: 1275px;
       height: 1650px;
-      overflow: visible;
       background: #FFFFFF;
+      position: relative;
     }
     
-    .card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      gap: 10px;
-      
+    .cbse-logo {
       position: absolute;
-      width: 840px;
-      height: 840px;
-      left: 236px;
-      top: 291px;
-      z-index: 1;
-      
-      background: transparent;
-      border: 2px solid #9D9D9D;
-      border-radius: 14px;
-
-    }
-
-    .card-pdf {
-      position: absolute;
-      width: 936px;
-      height: 946px;
-      left: 203px;
-      top: 261px;
-      z-index: 0;
-      object-fit: contain;
+      width: 462px;
+      height: 83px;
+      left: 109px;
+      top: 46px;
     }
     
-    .card-innerContent {
+    .link-text-pdf {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 0px;
-      gap: 40px;
-      
-      width: 820px;
-      height: 739px;
-    }
-    
-    .card-title {
-      
-      width: 820px;
-      height: 18px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 15px;
-      line-height: 18px;
-      
-      text-align: center;
-      letter-spacing: 0.017em;
-      
-      color: #595959;
-      
-      
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-
-    }
-    
-    .frame {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      gap: 29px;
-      
-      width: 820px;
-      height: 681px;
-      
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .student-details {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 0px 5px;
-      gap: 81px;
-      
-      width: 644px;
-      height: 174px;
-      
-      
-      flex: none;
-      order: 0;
-      flex-grow: 0;
-    }
-    
-    .label {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 0px;
-      gap: 12px;
-      
-      width: 123px;
-      height: 174px;
-      flex: none;
-      order: 0;
-      flex-grow: 0;
-    }
-    
-    .content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      gap: 12px;
-      
-      width: 430px;
-      height: 174px;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      flex-grow: 0;
-    }
-    
-    .rollno {
-      margin: 0 auto;
-      width: 123px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .Candidate-name {
-      margin: 0 auto;
-      width: 123px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-
-    }
-    
-    .mother-name {
-      margin: 0 auto;
-      width: 123px;
-      height: 19px;
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      letter-spacing: -0.02em;
-      color: #212429;
-      flex: none;
-      order: 2;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .father-name {
-      margin: 0 auto;
-      width: 123px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      flex: none;
-      order: 3;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .dob {
-      margin: 0 auto;
-      width: 123px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 4;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .school-name {
-      margin: 0 auto;
-      width: 123px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      letter-spacing: -0.015em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 5;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .rollno-cont {
-      width: 430px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .name-cont {
-      width: 430px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .mother-cont {
-      width: 430px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 2;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .father-cont {
-      width: 430px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 3;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .dob-cont {
-      width: 430px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 4;
-      align-self: stretch;
-      flex-grow: 0;
-      
-    }
-    
-    .schoolname-cont {
-      width: 430px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      
-      letter-spacing: -0.015em;
-      
-      color: #212429;
-      
-      flex: none;
-      order: 5;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .table {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0px;
-      gap: 15px;
-      
-      width: 820px;
-      height: 478px;
-      
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .marks {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0px;
+      align-items: flex-end;
       gap: 9px;
-      
-      width: 820px;
-      height: 289px;
-      
-      
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
+      position: absolute;
+      width: 321px;
+      height: 69px;
+      left: 847px;
+      top: 138px;
     }
     
-    .disclaimers {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      gap: 32px;
-      
-      width: 790px;
-      height: 174px;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      flex-grow: 0;
-    }
-    
-    .note {
-      width: 790px;
-      height: 71px;
-      
+    .link-text-pdf h3 {
       font-family: 'Roboto';
       font-style: normal;
       font-weight: 400;
-      font-size: 15px;
-      line-height: 23.5px;
-      text-align: center;
-      letter-spacing: 0.015em;
-      
-      color: #303133;
-      
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .note span {
-      letter-spacing: 2%;
-    }
-    
-    .bold {
-      color: #1A191A;
-      font-weight: 600;
-    }
-    
-    .disclaim {
-      width: 790px;
-      height: 71px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 23px;
-      /* or 144% */
-      text-align: center;
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-      
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .disclaim span {
-      font-weight: 600;
-    }
-    
-    .label-mark {
-      display: flex;
-      align-items: flex-start;
-      padding: 0px 5px;
-      gap: 10px;
-      width: 820px;
-      height: 19px;
-      box-sizing: border-box;
-    }
-    
-    .label-content {
-      width: 792px;
-      height: 19px;
-      position: relative;
-    }
-    
-    .label-content .col1 {
-      position: absolute;
-      width: 74px;
-      height: 19px;
-      left: 0px;
-      top: 0px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .col2 {
-      position: absolute;
-      width: 78px;
-      height: 19px;
-      left: 150px;
-      top: 0px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .col3 {
-      position: absolute;
-      width: 60px;
-      height: 19px;
-      left: 375px;
-      top: 0px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .col4 {
-      position: absolute;
-      width: 115px;
-      height: 19px;
-      left: 450px;
-      top: 0px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .col5 {
-      position: absolute;
-      width: 48px;
-      height: 19px;
-      left: 588px;
-      top: 0px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .col6 {
-      position: absolute;
-      width: 143px;
-      height: 19px;
-      left: 649px;
-      top: 0px;
-      
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    
-    .subject1 {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 6.5px 5px;
-      gap: 10px;
-      
-      width: 820px;
-      height: 31px;
-      
-      background: #F2F2F2;
-      border-width: 2px 0px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-      box-sizing: border-box;
-    }
-    
-    .subject1-cont {
-      width: 810px;
-      height: 18px;
-      position: relative;
-    }
-    
-    .subject1-code {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: -1px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-    }
-    
-    .subject1-sub {
-      position: absolute;
-      width: 140px;
-      height: 19px;
-      left: 150px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
+      font-size: 30px;
+      line-height: 35px;
       letter-spacing: -0.015em;
-      
-      color: #212429;
+      color: #ABABAB;
     }
     
-    .subject1-theory {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 374px;
-      top: 50%;
-      transform: translateY(-50%);
-      
+    .link-text-pdf h4 {
       font-family: 'Roboto';
       font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
+      font-weight: 400;
+      font-size: 21px;
+      line-height: 25px;
+      letter-spacing: -0.005em;
+      color: #ABABAB;
     }
     
-    .subject1-pract {
+    .lower-block {
       position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 449px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .total1 {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 587px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-    }
-    
-    .grade1 {
-      position: absolute;
-      width: 20px;
-      height: 19px;
-      left: 649px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject2 {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 6.5px 5px;
-      gap: 10px;
-      box-sizing: border-box;
-      margin: -2px 0;
-      
-      width: 820px;
-      height: 31px;
-      
+      width: 1275px;
+      height: 574px;
+      left: calc(50% - 1275px/2);
+      bottom: 0px;
       background: #FFFFFF;
-      border-width: 2px 0px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
     }
     
-    .subject2-cont {
-      width: 810px;
-      height: 18px;
-      position: relative;
+    .lower-block-p {
+        position: absolute;
+        left: 165px;
+        right: 166px;
+        top: 1081px;
+        bottom: 551px;
+        font-family: 'Roboto';
+        font-style: normal;
+        z-index: 9999;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        letter-spacing: -0.013em;
+        color: #9E9E9E;
     }
     
-    .subject2-code {
+    .main-table-pdf {
       position: absolute;
-      width: 27px;
-      height: 19px;
-      left: -1px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
+      width: 1028px;
+      height: 817px;
+      left: calc(50% - 1028px/2 + 0.5px);
+      top: 236px;
+      background: #FFFFFF;
+      border: 1px solid #9B9B9B;
+      box-shadow: -18px 18px 20px rgba(0, 0, 0, 0.08), 18px 18px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
     }
     
-    .subject2-sub {
-      position: absolute;
-      width: 119px;
-      height: 19px;
-      left: 150px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .subject2-theory {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 375px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject2-pract {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 449px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .total2 {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 587px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429; 
-    }
-    
-    .grade2 {
-      position: absolute;
-      width: 20px;
-      height: 19px;
-      left: 649px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject3 {
+    .main-pdf-content {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding: 6.5px 5px;
-      gap: 10px;
-      box-sizing: border-box;
-      margin: -2px 0;
-      
-      width: 820px;
-      height: 31px;
-      
-      background: #F2F2F2;
-      border-width: 2px 0px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 2;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .subject3-cont {
-       width: 810px;
-      height: 18px;
-      position: relative;
-    }
-    
-    .subject3-code {
+      gap: 19px;
       position: absolute;
-      width: 27px;
-      height: 19px;
-      left: -1px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
+      width: 965px;
+      height: 760px;
+      left: calc(50% - 965px/2 - 0.5px);
+      top: calc(50% - 760px/2 - 7.5px);
     }
     
-    .subject3-sub {
-      position: absolute;
-      width: 193px;
-      height: 19px;
-      left: 150px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .subject3-theory {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 375px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject3-pract {
-       position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 449px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .total3 {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 587px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-    }
-    
-    .grade3 {
-      position: absolute;
-      width: 20px;
-      height: 19px;
-      left: 649px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .mark-content {
+    .main-pdf-upper-content {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      
-      width: 820px;
+      align-items: center;
+      gap: 34px;
+      width: 965px;
       height: 261px;
-      
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-
     }
     
-    .subject4 {
+    .pdf-content-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 935px;
+      height: 44px;
+    }
+    
+    .pdf-content-title h2 {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 28px;
+      text-align: center;
+      letter-spacing: -0.068em;
+      color: #212429;
+    }
+    
+    .pdf-table-divider {
+      width: 935px;
+      height: 2px;
+      background: #E5E5E5;
+    }
+    
+    .pdf-student-info-table {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding: 6.5px 5px;
-      gap: 10px;
-      box-sizing: border-box;
-      margin: -2px 0;
-      
-      width: 820px;
-      height: 31px;
-      
-      background: #FFFFFF;
-      border-width: 2px 0px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 3;
-      align-self: stretch;
-      flex-grow: 0;
+      gap: 2px;
+      width: 965px;
+      height: 183px;
     }
     
-    .subject4-cont {
-      width: 810px;
-      height: 18px;
-      position: relative;
-    }
-    
-    .subject4-code {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: -1px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-    }
-    
-    .subject4-sub {
-      position: absolute;
-      width: 64px;
-      height: 19px;
-      left: 150px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.015em;
-      
-      color: #212429;
-    }
-    
-    .subject4-theory {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 374px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject4-pract {
-       position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 449px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .total4 {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 587px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-    }
-    
-    .grade4 {
-      position: absolute;
-      width: 20px;
-      height: 19px;
-      left: 649px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject5 {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 6px 5px;
-      gap: 10px;
-      margin: -2px 0;
-      box-sizing: border-box;
-      
-      width: 820px;
-      height: 30px;
-      
-      background: #F2F2F2;
-      border-width: 2px 0px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 4;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .subject5-cont {
-      width: 810px;
-      height: 18px;
-      position: relative;
-    }
-    
-    .subject5-code {
-      position: absolute;
-      width: 26px;
-      height: 19px;
-      left: 0px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.04em;
-      
-      color: #212429;
-    }
-    
-    .subject5-sub {
-      position: absolute;
-      width: 121px;
-      height: 19px;
-      left: 150px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.015em;
-      
-      color: #212429;
-    }
-    
-    .subject5-theory {
-       position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 374px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .subject5-pract {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 449px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .total5 {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 587px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.01em;
-      
-      color: #212429;
-    }
-    
-    .grade5 {
-       position: absolute;
-      width: 20px;
-      height: 19px;
-      left: 649px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.03em;
-      
-      color: #212429;
-    }
-    
-    .additional-sub-label {
+    .pdf-student-info-column {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      align-items: center;
+      gap: 1px;
+      width: 965px;
+      height: 29px;
+    }
+    
+    .info-column1-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 4.5px 5px;
+      gap: 10px;
+      width: 240px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column-label-p {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 20px;
+      letter-spacing: -0.012em;
+      color: #212429;
+    }
+    
+    .info-column1-value {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 4.5px 5px;
+      gap: 10px;
+      width: 724px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column-value-p {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 20px;
+      letter-spacing: -0.012em;
+      color: #212429;
+    }
+    
+    .info-column2-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5.5px 5px;
+      gap: 10px;
+      width: 240px;
+      height: 31px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column2-value {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5.5px 5px;
+      gap: 10px;
+      width: 724px;
+      height: 31px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    
+    .info-column3-value {
+      display: flex;
+      align-items: center;
+      padding: 4.5px 5px;
+      width: 724px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column3-label {
+      display: flex;
+      align-items: center;
+      padding: 4.5px 5px;
+      width: 240px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    
+    .info-column4-label {
+      display: flex;
+      align-items: center;
+      padding: 4.5px 5px;
+      gap: 10px;
+      width: 240px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column4-value {
+      display: flex;
+      align-items: center;
+      padding: 4.5px 5px;
+      width: 724px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    
+    .info-column5-label {
+      display: flex;
+      align-items: center;
+      padding: 5.5px 5px;
+      width: 240px;
+      height: 31px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column5-value { 
+      display: flex;
+      align-items: center;
+      padding: 5.5px 5px;
+      width: 724px;
+      height: 31px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    
+    .pdf-student-info-column4 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1px;
+      width: 965px;
+      height: 29px;
+      margin-top: -1px;
+    }
+    
+    .info-column6-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 4.5px 5px;
+      gap: 10px;
+      width: 240px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .info-column6-value {
+      display: flex;
+      align-items: center;
+      padding: 4.5px 5px;
+      width: 724px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+  </style> 
+  <style>
+    .main-pdf-lower-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 17px;
+      width: 965px;
+      height: 480px;
+    }
+    
+    .pdf-disclaimer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 17px;
+      width: 949px;
+      height: 185px;
+    }
+    .pdf-disclaimer-note {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 929px;
+      height: 75px;
+    }
+    .pdf-disclaimer-note h6 {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 24px;
+      text-align: center;
+      letter-spacing: -0.01em;
+      color: #212429;
+    }
+    .pdf-disclaimer-note h6 span  {
+      font-weight: 600;
+    }
+    .pdf-disclaimer-note p {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 24px;
+      text-align: center;
+      letter-spacing: -0.01em;
+      color: #212429;
+    }
+    .pdf-disclaimer-note p span {
+      font-weight: 600;
+    }
+    
+    
+    .pdf-disclaimer-disclaimer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 17px;
+      width: 949px;
+      height: 93px;
+    }
+    .disclaimer-divider {
+      width: 935px;
+      height: 1px;
+      background: #EEEEEE;
+    }
+    
+    .text-disclaimer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 949px;
+      height: 75px;
+    }
+    .text-disclaimer h6 {
+        width: 949px;
+        height: 25px;
+        
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 25px;
+        text-align: center;
+        letter-spacing: -0.01em;
+        color: #212429;
+    }
+    .text-disclaimer p {
+      width: 949px;
+      height: 50px;
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 25px;
+      text-align: center;
+      letter-spacing: -0.01em;
+      color: #212429;
+    }
+    .text-disclaimer h6 span{
+      font-weight: 600;
+    }
+  </style>
+  <style>
+    .pdf-marks-table {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      width: 965px;
+      height: 278px;
+    }
+    
+    .pdf-marks-table-labels {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1px;
+      width: 965px;
+      height: 30px;
+    }
+    
+    .pdf-marks-table-labels-column1 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px 4px;
+      width: 175px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .pdf-marks-table-labels-column2 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px 4px;
+      width: 278px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .pdf-marks-table-labels-column3 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px;
+      width: 89px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .pdf-marks-table-labels-column4 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px 4px;
+      width: 150px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .pdf-marks-table-labels-column5 {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px;
+      width: 73px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .pdf-marks-table-labels-column6 {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px;
+      width: 195px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .marks-label-p {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 20px;
+      letter-spacing: -0.012em;
+      color: #212429;
+    }
+    
+    
+    
+    .pdf-marks-table-sub {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+      width: 965px;
+      height: 246px;
+    }
+    
+    .pdf-marks-table-sub-main {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1px;
+      width: 965px;
+      height: 30px;
+    }
+    
+    .marks-value-text {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 20px;
+      color: #212429;
+    }
+    
+    .main1-subcode {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      width: 175px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main1-subname {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px 4px;
+      width: 278px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main1-subname p {
+      letter-spacing: -0.01em;
+    }
+    
+    
+    .main1-theory {
+      display: flex;
       align-items: center;
       padding: 5px;
       gap: 10px;
+      width: 89px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main1-theory p {
+      letter-spacing: -0.015em;
+    }
+    
+    .main1-practical {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px;
+      width: 150px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main1-practical p {
+      letter-spacing: -0.015em;
+    }
+    
+    .main1-total  {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px;
+      width: 73px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main1-total p  {
+      letter-spacing: -0.015em;
+    }
+    
+    .main1-grade {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px;
+      width: 195px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+      letter-spacing: -0.015em;
+    }
+    
+    
+    .main2-subcode {
+        display: flex;
+        align-items: center;
+        padding: 2px 5px 7px;
+        
+        width: 175px;
+        height: 29px;
+        
+        background: rgba(255, 255, 255, 0.01);
+        box-shadow: 0px 0px 0px 1px #E0E1E5;
+
+    }
+    .main2-subname {
+      display: flex; 
+      align-items: center;
+      padding: 2px 5px 7px;
+      width: 278px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    
+    
+    .main2-subname p,
+    .main2-grade p,
+    .main2-theory p,
+    .main2-total,
+    .main2-practical,
+    .main2-subcode p{
+      letter-spacing: -0.015em;
+    }
+    
+    
+    .main2-grade {
+      display: flex;
+      align-items: center;
+      padding: 2px 4px 7px 5px;
+      width: 195px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main2-theory {
+      display: flex;
+      align-items: center;
+      padding: 2px 5px 7px;
       
-      width: 136px;
+      width: 89px;
       height: 29px;
       
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 5;
-      flex-grow: 0;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
     }
-    
-    .additional-sub-label p {
-      width: 126px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      flex-grow: 0;
-    }
-    
-    .last-sub-result {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      
-      width: 820px;
-      height: 66px;
-      
-      flex: none;
-      order: 6;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .additional-subject {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 6px;
-      gap: 10px;
-      box-sizing: border-box;
-      margin: -2px 0 -1px;
-      
-      width: 820px;
-      height: 31px;
-      
-      background: #F2F2F2;
-      border-width: 2px 0px 1px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .Additional-subject-cont {
-      width: 668px;
-      height: 19px;
-      position: relative;
-    }
-    
-    .additional-code  {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: -1px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .additional-sub {
-      position: absolute;
-      width: 65px;
-      height: 19px;
-      left: 149px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .additional-theory {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 374px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .additional-pract {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 448px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .total-add {
-      position: absolute;
-      width: 27px;
-      height: 19px;
-      left: 586px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .grade-add  {
-      position: absolute;
-      width: 20px;
-      height: 19px;
-      left: 648px;
-      top: 50%;
-      transform: translateY(-50%);
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212429;
-    }
-    
-    .result {
-      box-sizing: border-box;
-      
-      /* Auto layout */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 8px 5px;
-      gap: 10px;
-      
-      width: 820px;
-      height: 35px;
-      
-      border-width: 2px 0px;
-      border-style: solid;
-      border-color: #212429;
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
-    }
-    
-    .result-inner-content {
+    .main2-practical {
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding: 0px;
-      gap: 323px;
-      
-      width: 810px;
-      height: 19px;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
+      padding: 2px 5px 7px;
+      width: 150px;
+      height: 29px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
+    }
+    .main2-total {
+        display: flex;
+        align-items: center;
+        padding: 2px 5px 7px;
+        width: 73px;
+        height: 29px;
+        background: rgba(255, 255, 255, 0.01);
+        box-shadow: 0px 0px 0px 1px #E0E1E5;
     }
     
-    .result:nth-child(1) p {
-      width: 52px;
-      height: 19px;
-      
+    
+    .additonal-label {
+      width: 135px;
+      height: 20px;
       font-family: 'Roboto';
       font-style: normal;
       font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212526;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      flex-grow: 0;
+      font-size: 17px;
+      line-height: 20px;
+      letter-spacing: -0.018em;
+      color: #212429;
     }
     
-    .result h1 {
-      width: 39px;
-      height: 19px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.02em;
-      
-      color: #212528;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      flex-grow: 0;
-    }
-    
-    .image {
-      
-      position: absolute;
-      width: 700px;
-      height: 126px;
-      left: 70px;
-      top: 69px;
-      
-    }
-    
-    .link {
+    .results {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0px;
-      gap: 8px;
-      
-      position: absolute;
-      width: 174px;
-      height: 46px;
-      left: 1033px;
-      top: 202px;
+      flex-direction: row;
+      align-items: center;
+      gap: 1px;
+      width: 965px;
+      height: 30px;
     }
     
-    .link p {
-      width: 174px;
-      height: 19px;
-      
+    .results-label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px;
+      width: 454px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
       font-family: 'Roboto';
       font-style: normal;
       font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.012em;
-      
-      color: #BABABA;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      align-self: stretch;
-      flex-grow: 0;
-    } 
+      font-size: 17px;
+      line-height: 20px;
+      color: #212429;
+    }
     
-    .link h6 {
-      width: 174px;
-      height: 19px;
-      
+    .results-result {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      width: 510px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.01);
+      box-shadow: 0px 0px 0px 1px #E0E1E5;
       font-family: 'Roboto';
       font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 20px;
       letter-spacing: -0.015em;
-      
-      color: #BABABA;
-      
-      
-      /* Inside auto layout */
-      flex: none;
-      order: 1;
-      align-self: stretch;
-      flex-grow: 0;
+      color: #212429;
     }
-    
-    .under-text {
-      position: absolute;
-      width: 997px;
-      height: 19px;
-      left: calc(50% - 997px/2);
-      top: 1557px;
-      
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 19px;
-      /* identical to box height */
-      letter-spacing: -0.015em;
-      
-      color: #BABABA;
-    }
-    
   </style>
 </head>
 <body>
-
-  <div id="pdf-capture">
-    <div class="pdf">
+  <div class="pdf-capture">
     
-    <img src="./image-logo-typeshit.png" class="image" alt="logo" crossorigin="anonymous" />
-    <img src="./card.png" class="card-pdf" alt="shadow" crossorigin="anonymous" />
-    <div class="card">
-      <div class="card-innerContent">
-        <p class="card-title">Secondary School Examination(Class X) Results 2022</p>
-        <div class="frame">
-          <div class="student-details">
-            
-            <div class="label">
-              <p class="rollno">Roll No :</p>
-              <p class="Candidate-name">Candidate Name :</p>
-              <p class="mother-name">Mother’s Name :</p>
-              <p class="father-name">Father’s Name :</p>
-              <p class="dob">Date of Birth :</p>
-              <p class="school-name">School’s Name :</p>
-            </div>
-            
-            <div class="content">
-              <p class="rollno-cont">13168182</p>
-              <p class="name-cont">PRAKRITI SAGGI</p>
-              <p class="mother-cont">POONAM SAGGI</p>
-              <p class="father-cont">BAL KISHAN SAGGI</p>
-              <p class="dob-cont">13/04/2006</p>
-              <p class="schoolname-cont">WOODLANDS OVERSEAS SCH VPO SATAUR HOSHIARPUR PB</p>
-            </div>
+    <img class="cbse-logo" src="./image-logo-typeshit.png" alt="cbse-logo">
+    <div class="link-text-pdf">
+      <h3>https://cbseresults.nic.in</h3>
+      <h4>Examination Results 2025</h4>
+    </div>
+    
+    <div class="main-table-pdf">
+      <div class="main-pdf-content">
+        <div class="main-pdf-upper-content">
+          <div class="pdf-content-title">
+            <h2>Secondary School Examination (Class X) Results 2025</h2>
+            <div class="pdf-table-divider"></div>
           </div>
-          
-          <div class="table">
-            
-            <div class="marks">
-              <div class="label-mark">
-                <div class="label-content">
-                  <p class="col1">SUB CODE</p>
-                  <p class="col2">SUB NAME</p>
-                  <p class="col3">THEORY</p>
-                  <p class="col4">I.A / PRACTICAL</p>
-                  <p class="col5">TOTAL</p>
-                  <p class="col6">POSITIONAL GRADE</p>
-                </div>
+          <div class="pdf-student-info-table">
+            <div class="pdf-student-info-column">
+              <div class="info-column1-label">
+                <p class="info-column-label-p">Roll No :</p>
               </div>
-              <div class="mark-content">
-                
-                <div class="subject1">
-                  <div class="subject1-cont">
-                    <p class="subject1-code">184</p>
-                    <p class="subject1-sub">ENGLISH LNG & LIT.</p>
-                    <p class="subject1-theory">073</p>
-                    <p class="subject1-pract">020</p>
-                    <p class="total1">093</p>
-                    <p class="grade1">A1</p>
-                  </div>
-                </div>
-                <div class="subject2">
-                  <div class="subject2-cont">
-                    <p class="subject2-code">085</p>
-                    <p class="subject2-sub">HINDI COURSE-B</p>
-                    <p class="subject2-theory">072</p>
-                    <p class="subject2-pract">020</p>
-                    <p class="total2">092</p>
-                    <p class="grade2">A2</p>
-                  </div>
-                </div>
-                <div class="subject3">
-                  <div class="subject3-cont">
-                    <p class="subject3-code">041</p>
-                    <p class="subject3-sub">MATHEMATICS STANDARD</p>
-                    <p class="subject3-theory">074</p>
-                    <p class="subject3-pract">020</p>
-                    <p class="total3">094</p>
-                    <p class="grade3">A1</p>
-                  </div>
-                </div>
-                <div class="subject4">
-                  <div class="subject4-cont">
-                    <p class="subject4-code">086</p>
-                    <p class="subject4-sub">SCIENCE</p>
-                    <p class="subject4-theory">076</p>
-                    <p class="subject4-pract">020</p>
-                    <p class="total4">096</p>
-                    <p class="grade4">A1</p>
-                  </div>
-                </div>
-                <div class="subject5">
-                  <div class="subject5-cont">
-                    <p class="subject5-code">087</p>
-                    <p class="subject5-sub">SOCIAL SCIENCE</p>
-                    <p class="subject5-theory">077</p>
-                    <p class="subject5-pract">020</p>
-                    <p class="total5">097</p>
-                    <p class="grade5">A1</p>
-                  </div>
-                </div>
-               <div class="additional-sub-label"><p>Additional Subject</p></div>
-               <div class="last-sub-result">
-                 <div class="additional-subject">
-                   <div class="Additional-subject-cont">
-                    <p class="additional-code">004</p>
-                    <p class="additional-sub">PUNJABI</p>
-                    <p class="additional-theory">077</p>
-                    <p class="additional-pract">020</p>
-                    <p class="total-add">097</p>
-                    <p class="grade-add">A1</p>
-                   </div>
-                 </div>
-                 <div class="result">
-                   <div class="result-inner-content">
-                     <p>Result</p>
-                     <h1>PASS</h1>
-                   </div>
-                 </div>
-               </div>
+              <div class="info-column1-value">
+                <p class="info-column-value-p">25139772</p>
+              </div>
+            </div>
+            <div class="pdf-student-info-column">
+              <div class="info-column2-label">
+                <p class="info-column-label-p">Candidate Name :</p>
+              </div>
+              <div class="info-column2-value">
+                <p class="info-column-value-p">SIGMA RIZZLER</p>
+              </div>
+            </div>
+            <div class="pdf-student-info-column">
+              <div class="info-column3-label">
+                <p class="info-column-label-p">Mother's Name :</p>
+              </div>
+              <div class="info-column3-value">
+                <p class="info-column-value-p">SIGMA LADY</p>
+              </div>
+            </div>
+            <div class="pdf-student-info-column4">
+              <div class="info-column4-label">
+                <p class="info-column-label-p">Father's Name :</p>
+              </div>
+              <div class="info-column4-value">
+                <p class="info-column-value-p">SIGMA THE PREDATOR</p>
+              </div>
+            </div>
+            <div class="pdf-student-info-column">
+              <div class="info-column5-label">
+                <p class="info-column-label-p">Date of Birth :</p>
+              </div>
+              <div class="info-column5-value">
+                <p class="info-column-value-p">13/08/2010</p>
+              </div>
+            </div>
+            <div class="pdf-student-info-column">
+              <div class="info-column6-label">
+                <p class="info-column-label-p">School's Name :</p>
+              </div>
+              <div class="info-column6-value">
+                <p class="info-column-value-p">BITCHLESS FOREVER PUBLIC SCHOOL |
+                ALABAMA</p>
               </div>
             </div>
             
-            <div class="disclaimers">
-              <p class="note">Note : Abbreviations used against Result <span
-              class="bold">R.L.</span> -
-              <span>Result Later (Your result is under preparation and it will be
-              declared soon), <span class="bold">N.E.</span> - Not Eligible,
-              <span class="bold">R.W.</span> - Result Withheld, <span class="bold">ABST</span>
-              - Absent, <span class="bold">COMP</span> - Compartment, <span
-              class="bold">UFM</span> - unfairmeans, <span class="bold">XXXX</span> -
-              Improvement, SJD - Subjudice, <span class="bold">N.R.</span> - Not Registered</span></p>
-              <p class="disclaim"><span>Disclaimer :</span> Neither NIC nor CBSE is responsible for any inadvertent error that may have crept in the results being
- published on Net. The results published on net are for Immediate information to the examinees. These can not be
-treated as original mark sheets. Original mark sheets have been issued by the Board separately.</p>
-            </div>
-            
           </div>
-          
+        </div>
+        <div class="main-pdf-lower-content">
+          <div class="pdf-marks-table">
+            <div class="pdf-marks-table-labels">
+              <div class="pdf-marks-table-labels-column1">
+                <p class="marks-label-p">SUB CODE</p>
+              </div>
+              <div class="pdf-marks-table-labels-column2">
+                <p class="marks-label-p">SUB NAME</p>
+              </div>
+              <div class="pdf-marks-table-labels-column3">
+                <p class="marks-label-p">THEORY</p>
+              </div>
+              <div class="pdf-marks-table-labels-column4">
+                <p class="marks-label-p">I.A/PRACTICAL</p>
+              </div>
+              <div class="pdf-marks-table-labels-column5">
+                <p class="marks-label-p">TOTAL</p>
+              </div>
+              <div class="pdf-marks-table-labels-column6">
+                <p class="marks-label-p">POSITIONAL GRADE</p>
+              </div>
+            </div>
+            <div class="pdf-marks-table-sub">
+              <div class="pdf-marks-table-sub-main">
+                <div class="main1-subcode">
+                  <p class="marks-value-text">184</p>
+                </div>
+                <div class="main1-subname">
+                  <p class="marks-value-text">ENGLISH LNG & LIT.</p>
+                </div>
+                <div class="main1-theory">
+                  <p class="marks-value-text">073</p>
+                </div>
+                <div class="main1-practical">
+                  <p class="marks-value-text">020</p>
+                </div>
+                <div class="main1-total">
+                  <p class="marks-value-text">093</p>
+                </div>
+                <div class="main1-grade">
+                  <p class="marks-value-text">A1</p>
+                </div>
+              </div>
+              <div class="pdf-marks-table-sub-main">
+                <div class="main1-subcode">
+                  <p class="marks-value-text">002</p>
+                </div>
+                <div class="main1-subname">
+                  <p class="marks-value-text">HINDI COURSE-A</p>
+                </div>
+                <div class="main1-theory">
+                  <p class="marks-value-text">072</p>
+                </div>
+                <div class="main1-practical">
+                  <p class="marks-value-text">020</p>
+                </div>
+                <div class="main1-total">
+                  <p class="marks-value-text">092</p>
+                </div>
+                <div class="main1-grade">
+                  <p class="marks-value-text">A1</p>
+                </div>
+              </div>
+              <div class="pdf-marks-table-sub-main">
+                <div class="main1-subcode">
+                  <p class="marks-value-text">041</p>
+                </div>
+                <div class="main1-subname">
+                  <p class="marks-value-text">MATHEMATICS STANDARD</p>
+                </div>
+                <div class="main1-theory">
+                  <p class="marks-value-text">066</p>
+                </div>
+                <div class="main1-practical">
+                  <p class="marks-value-text">020</p>
+                </div>
+                <div class="main1-total">
+                  <p class="marks-value-text">086</p>
+                </div>
+                <div class="main1-grade">
+                  <p class="marks-value-text">A2</p>
+                </div>
+              </div>
+              <div class="pdf-marks-table-sub-main">
+                <div class="main2-subcode">
+                  <p class="marks-value-text">086</p>
+                </div>
+                <div class="main2-subname">
+                  <p class="marks-value-text">SCIENCE</p>
+                </div>
+                <div class="main2-theory">
+                  <p class="marks-value-text">078</p>
+                </div>
+                <div class="main2-practical">
+                  <p class="marks-value-text">020</p>
+                </div>
+                <div class="main2-total">
+                  <p class="marks-value-text">098</p>
+                </div>
+                <div class="main2-grade">
+                  <p class="marks-value-text">A1</p>
+                </div>
+              </div>
+              <div class="pdf-marks-table-sub-main">
+                <div class="main1-subcode">
+                  <p class="marks-value-text">087</p>
+                </div>
+                <div class="main1-subname">
+                  <p class="marks-value-text">SOCIAL SCIENCE</p>
+                </div>
+                <div class="main1-theory">
+                  <p class="marks-value-text">077</p>
+                </div>
+                <div class="main1-practical">
+                  <p class="marks-value-text">020</p>
+                </div>
+                <div class="main1-total">
+                  <p class="marks-value-text">097</p>
+                </div>
+                <div class="main1-grade">
+                  <p class="marks-value-text">A1</p>
+                </div>
+              </div>
+              <div class="pdf-marks-table-sub-main">
+                <div class="main1-subcode">
+                  <p class="additonal-label">Additional Subject</p>
+                </div>
+                <div class="main1-subname"></div>
+                <div class="main1-theory"></div>
+                <div class="main1-practical"></div>
+                <div class="main1-total"></div>
+                <div class="main1-grade"></div>
+              </div>
+              <div class="pdf-marks-table-sub-main">
+                <div class="main1-subcode">
+                  <p class="marks-value-text">402</p>
+                </div>
+                <div class="main1-subname">
+                  <p class="marks-value-text">INFORMATION TECHNOLOGY</p>
+                </div>
+                <div class="main1-theory">
+                  <p class="marks-value-text">046</p>
+                </div>
+                <div class="main1-practical">
+                  <p class="marks-value-text">050</p>
+                </div>
+                <div class="main1-total">
+                  <p class="marks-value-text">096</p>
+                </div>
+                <div class="main1-grade">
+                  <p class="marks-value-text">A1</p>
+                </div>
+              </div>
+              <div class="results">
+                <div class="results-label">
+                  <p>Results :</p>
+                </div>
+                <div class="results-result">
+                  <p>PASS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-disclaimer">
+            <div class="pdf-disclaimer-note">
+              <h6><span>Note :</span> Abbreviations used against Result</h6>
+              <p><span>R.L.</span> - Result Later(Your result is under
+              preparation and it will be declared soon), <span>N.E.</span> - Not Eligible,
+              <span>R.W.</span> - Result withheld, <span>ABST</span></p>
+              <p>- Absent <span>COMP</span> - Compartment, UFM - Unfairmeans,
+              <span>XXXX</span> - Improvement, <span>SJD</span> - Subjudice,
+              <span>N.R.</span> - Not Registered</p>
+            </div>
+            <div class="pdf-disclaimer-disclaimer">
+              <div class="disclaimer-divider"></div>
+              <div class="text-disclaimer">
+                <h6><span>Disclaimer :</span> Neither NIC nor CBSE is responsible for any inadvertent error that may have crept in the results being published on</h6>
+                <p>Net. The results published on net are for Immediate information to the examinees. These can not be treated as original mark sheets. Original mark sheets have been issued by the Board separately.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="link">
-      <p>https://cbseresults.nic.in</p>
-      <h6>Examination Result 2022</h6>
-    </div>
-    <p class="under-text">This site designed, developed and hosted by National informatics Centre, Ministry of Electronics & Information Technology, Government of India.</p>
-  </div>
+    
+    <p class="lower-block-p">This site is designed, developed and hosted by National informatics Centre, Ministry of Electronics & Information Technology, Governmnnt of India.</p>
+    <div class="lower-block"></div>
   </div>
   <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
   Download PDF  
 </button>  
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<script>
+ <script>
   async function downloadAsPDF() {
     const { jsPDF } = window.jspdf;
     const el = document.getElementById("pdf-capture");
