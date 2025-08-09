@@ -1005,77 +1005,55 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+
 <script>
-async function capturePdfWithShadows() {
-  const el = document.querySelector("#pdf-capture");
-  if (!el) throw new Error("#pdf-capture not found");
+function capturePDF() {
+  const target = document.querySelector("#pdf-capture");
 
-  // how much extra space around element to guarantee shadow not clipped
-  const EXTRA = 100; // increase if you have huge spread/blur
+  // Save & remove styles from all ancestors
+  const ancestors = [];
+  let el = target;
+  while (el) {
+    ancestors.push({
+      node: el,
+      overflow: el.style.overflow,
+      clipPath: el.style.clipPath,
+      transform: el.style.transform
+    });
+    el.style.overflow = "visible";
+    el.style.clipPath = "none";
+    el.style.transform = "none";
+    el = el.parentElement;
+  }
 
-  // get size of original
-  const rect = el.getBoundingClientRect();
-
-  // clone node so we don't change layout
-  const clone = el.cloneNode(true);
-
-  // offscreen wrapper so styles still apply (classes/stylesheets stay)
-  const wrapper = document.createElement("div");
-  wrapper.style.position = "absolute";
-  wrapper.style.left = "-99999px"; // offscreen
-  wrapper.style.top = "0";
-  wrapper.style.width = (rect.width + EXTRA * 2) + "px";
-  wrapper.style.height = (rect.height + EXTRA * 2) + "px";
-  wrapper.style.padding = EXTRA + "px";
-  wrapper.style.boxSizing = "border-box";
-  // match page background (optional) — change if your page isn't white
-  wrapper.style.background = window.getComputedStyle(document.body).backgroundColor || "#ffffff";
-  wrapper.style.overflow = "visible"; // ensure shadows visible
-
-  // append clone
-  wrapper.appendChild(clone);
-  document.body.appendChild(wrapper);
-
-  try {
-    // wait for webfonts & images inside cloned node to load
-    if (document.fonts && document.fonts.ready) {
-      await document.fonts.ready;
-    }
-    const imgs = Array.from(wrapper.querySelectorAll("img"));
-    await Promise.all(imgs.map(img => {
-      if (img.complete) return Promise.resolve();
-      return new Promise(r => { img.onload = r; img.onerror = r; });
-    }));
-
-    // call html2canvas on our wrapper
-    const canvas = await html2canvas(wrapper, {
-      scale: 2,               // sharper shadows
-      useCORS: true,
-      allowTaint: true,
-      logging: false,
-      backgroundColor: null,
-      foreignObjectRendering: true, // helps with complex CSS (try true)
-      // ensure html2canvas calculates proper size from our wrapper
-      windowWidth: wrapper.offsetWidth,
-      windowHeight: wrapper.offsetHeight
+  html2canvas(target, {
+    backgroundColor: null,
+    scale: 2,
+    useCORS: true,
+    allowTaint: true,
+    logging: true,
+    foreignObjectRendering: false,
+    imageTimeout: 0
+  }).then(canvas => {
+    // Restore styles
+    ancestors.forEach(a => {
+      a.node.style.overflow = a.overflow;
+      a.node.style.clipPath = a.clipPath;
+      a.node.style.transform = a.transform;
     });
 
-    // create pdf (same approach as your code)
-    const imgData = canvas.toDataURL("image/png", 1.0);
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation: "p", unit: "px", format: [canvas.width, canvas.height] });
-    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-    pdf.save("cbse-result.pdf");
-  } finally {
-    // cleanup
-    wrapper.remove();
-  }
+    // Export to PDF
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF({
+      orientation: "p",
+      unit: "px",
+      format: [canvas.width, canvas.height]
+    });
+    pdf.addImage(imgData, "PNG", 0, 0);
+    pdf.save("file.pdf");
+  });
 }
-
-// hookup to your button
-document.querySelector("button").addEventListener("click", () => {
-  capturePdfWithShadows().catch(err => { console.error(err); alert("PDF failed: " + err.message); });
-});
 </script>
+  
 </body>
 </html>
