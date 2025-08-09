@@ -317,6 +317,14 @@
       background: rgba(255, 255, 255, 0.01);
       box-shadow: 0px 0px 0px 1px #E0E1E5;
     }
+    
+    .shadow {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
   </style> 
   <style>
     .main-pdf-lower-content {
@@ -744,7 +752,7 @@
 </head>
 <body>
   <div id="pdf-capture">
-    
+    <img class="shadow" src="./Realsheet-2.png" alt="">
     <img class="cbse-logo" src="./image-logo-typeshit.png" alt="cbse-logo">
     <div class="link-text-pdf">
       <h3>https://cbseresults.nic.in</h3>
@@ -1002,34 +1010,29 @@
   <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
   Download PDF  
 </button>  
- 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<script>
-function capturePDF() {
-  const { jsPDF } = window.jspdf;
 
-  html2canvas(document.querySelector("#pdf-capture"), {
-    backgroundColor: null,
-    scale: 2,
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    foreignObjectRendering: false, // important for shadows
-    imageTimeout: 0
-  }).then(canvas => {
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF({
-      orientation: "p",
-      unit: "px",
-      format: [canvas.width, canvas.height]
+<script>
+  async function downloadAsPDF() {
+    const { jsPDF } = window.jspdf;
+    const el = document.getElementById("pdf-capture");
+    
+    window.scrollTo(0, 0); // Ensure nothing’s cut
+    const canvas = await html2canvas(el, {
+      scale: 2,
+      useCORS: true
     });
-    pdf.addImage(imgData, "PNG", 0, 0);
-    pdf.save("file.pdf");
-  });
-}
-</script>
-  
+
+    const imgData = canvas.toDataURL("image/jpeg", 1.0);
+    const pdf = new jsPDF("p", "mm", "a4");
+    const width = pdf.internal.pageSize.getWidth();
+    const height = (canvas.height * width) / canvas.width;
+
+    pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+    pdf.save("cbse-result.pdf");
+  }
+  </script>
 </body>
 </html>
