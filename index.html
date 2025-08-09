@@ -1002,47 +1002,23 @@
   <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
   Download PDF  
 </button>  
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 
 <script>
 function capturePDF() {
-  const target = document.querySelector("#pdf-capture");
+  const { jsPDF } = window.jspdf;
 
-  // Save & remove styles from all ancestors
-  const ancestors = [];
-  let el = target;
-  while (el) {
-    ancestors.push({
-      node: el,
-      overflow: el.style.overflow,
-      clipPath: el.style.clipPath,
-      transform: el.style.transform
-    });
-    el.style.overflow = "visible";
-    el.style.clipPath = "none";
-    el.style.transform = "none";
-    el = el.parentElement;
-  }
-
-  html2canvas(target, {
+  html2canvas(document.querySelector("#pdf-capture"), {
     backgroundColor: null,
     scale: 2,
     useCORS: true,
     allowTaint: true,
-    logging: true,
-    foreignObjectRendering: false,
+    logging: false,
+    foreignObjectRendering: false, // important for shadows
     imageTimeout: 0
   }).then(canvas => {
-    // Restore styles
-    ancestors.forEach(a => {
-      a.node.style.overflow = a.overflow;
-      a.node.style.clipPath = a.clipPath;
-      a.node.style.transform = a.transform;
-    });
-
-    // Export to PDF
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF({
       orientation: "p",
