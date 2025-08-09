@@ -15,7 +15,7 @@
       box-sizing: border-box;
     }
     
-    .pdf-capture {
+    #pdf-capture {
       width: 1275px;
       height: 1650px;
       background: #FFFFFF;
@@ -743,7 +743,7 @@
   </style>
 </head>
 <body>
-  <div class="pdf-capture">
+  <div id="pdf-capture">
     
     <img class="cbse-logo" src="./image-logo-typeshit.png" alt="cbse-logo">
     <div class="link-text-pdf">
@@ -999,9 +999,9 @@
     <p class="lower-block-p">This site is designed, developed and hosted by National informatics Centre, Ministry of Electronics & Information Technology, Governmnnt of India.</p>
     <div class="lower-block"></div>
   </div>
-  <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
-  Download PDF  
-</button>  
+  <button type="button" onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
+    Download PDF  
+  </button>  
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -1009,7 +1009,6 @@
   async function downloadAsPDF() {
     const { jsPDF } = window.jspdf;
     const el = document.getElementById("pdf-capture");
-    
     window.scrollTo(0, 0); // Ensure nothing’s cut
     const canvas = await html2canvas(el, {
       scale: 3,
