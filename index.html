@@ -1,1044 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link
-  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet">
-  <title>feature-1</title>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn Code To Image</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     
-    #pdf-capture {
-      width: 1275px;
-      height: 1650px;
-      background: #FFFFFF;
-      position: relative;
-    }
-    
-    .cbse-logo {
-      position: absolute;
-      width: 462px;
-      height: 83px;
-      left: 109px;
-      top: 46px;
-    }
-    
-    .link-text-pdf {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 9px;
-      position: absolute;
-      width: 321px;
-      height: 69px;
-      left: 847px;
-      top: 138px;
-    }
-    
-    .link-text-pdf h3 {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 30px;
-      line-height: 35px;
-      letter-spacing: -0.015em;
-      color: #ABABAB;
-    }
-    
-    .link-text-pdf h4 {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 21px;
-      line-height: 25px;
-      letter-spacing: -0.005em;
-      color: #ABABAB;
-    }
-    
-    .lower-block {
-      position: absolute;
-      width: 1275px;
-      height: 574px;
-      left: calc(50% - 1275px/2);
-      bottom: 0px;
-      background: #FFFFFF;
-    }
-    
-    .lower-block-p {
-        position: absolute;
-        left: 165px;
-        right: 166px;
-        top: 1081px;
-        bottom: 551px;
-        font-family: 'Roboto';
-        font-style: normal;
-        z-index: 9999;
-        font-weight: 400;
-        font-size: 15px;
-        line-height: 18px;
-        letter-spacing: -0.013em;
-        color: #9E9E9E;
-    }
-    
-    .main-table-pdf {
-      position: absolute;
-      width: 1028px;
-      height: 817px;
-      left: calc(50% - 1028px/2 + 0.5px);
-      top: 236px;
-      background: #FFFFFF;
-      border: 1px solid #9B9B9B;
-      border-radius: 10px;
-    }
-    
-    .main-pdf-content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 19px;
-      position: absolute;
-      width: 965px;
-      height: 760px;
-      left: calc(50% - 965px/2 - 0.5px);
-      top: calc(50% - 760px/2 - 7.5px);
-    }
-    
-    .main-pdf-upper-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 34px;
-      width: 965px;
-      height: 261px;
-    }
-    
-    .pdf-content-title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      width: 935px;
-      height: 44px;
-    }
-    
-    .pdf-content-title h2 {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 28px;
-      text-align: center;
-      letter-spacing: -0.068em;
-      color: #212429;
-    }
-    
-    .pdf-table-divider {
-      width: 935px;
-      height: 2px;
-      background: #E5E5E5;
-    }
-    
-    .pdf-student-info-table {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      width: 965px;
-      height: 183px;
-    }
-    
-    .pdf-student-info-column {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 965px;
-      height: 29px;
-    }
-    
-    .info-column1-label {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 4.5px 5px;
-      width: 240px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column-label-p {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 17px;
-      line-height: 20px;
-      letter-spacing: -0.012em;
-      color: #212429;
-    }
-    
-    .info-column1-value {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 4.5px 5px;
-      gap: 10px;
-      width: 720px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column-value-p {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 20px;
-      letter-spacing: -0.012em;
-      color: #212429;
-    }
-    
-    .info-column2-label {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5.5px 5px;
-      gap: 10px;
-      width: 240px;
-      height: 31px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column2-value {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5.5px 5px;
-      gap: 10px;
-      width: 720px;
-      height: 31px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    
-    .info-column3-value {
-      display: flex;
-      align-items: center;
-      padding: 4.5px 5px;
-      width: 720px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column3-label {
-      display: flex;
-      align-items: center;
-      padding: 4.5px 5px;
-      width: 240px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    
-    .info-column4-label {
-      display: flex;
-      align-items: center;
-      padding: 4.5px 5px;
-      gap: 10px;
-      width: 240px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column4-value {
-      display: flex;
-      align-items: center;
-      padding: 4.5px 5px;
-      width: 720px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    
-    .info-column5-label {
-      display: flex;
-      align-items: center;
-      padding: 5.5px 5px;
-      width: 240px;
-      height: 31px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column5-value { 
-      display: flex;
-      align-items: center;
-      padding: 5.5px 5px;
-      width: 720px;
-      height: 31px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    
-    .pdf-student-info-column4 {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0;
-      width: 965px;
-      height: 29px;
-      margin-top: -1px;
-    }
-    
-    .info-column6-label {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 4.5px 5px;
-      gap: 10px;
-      width: 240px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .info-column6-value {
-      display: flex;
-      align-items: center;
-      padding: 4.5px 5px;
-      width: 720px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    
-    .shadow {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-    }
-  </style> 
-  <style>
-    .main-pdf-lower-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 17px;
-      width: 965px;
-      height: 480px;
-    }
-    
-    .pdf-disclaimer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 17px;
-      width: 949px;
-      height: 185px;
-    }
-    .pdf-disclaimer-note {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 929px;
-      height: 75px;
-    }
-    .pdf-disclaimer-note h6 {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 24px;
-      text-align: center;
-      letter-spacing: -0.01em;
-      color: #212429;
-    }
-    .pdf-disclaimer-note h6 span  {
-      font-weight: 600;
-    }
-    .pdf-disclaimer-note p {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 24px;
-      text-align: center;
-      letter-spacing: -0.01em;
-      color: #212429;
-    }
-    .pdf-disclaimer-note p span {
-      font-weight: 600;
-    }
-    
-    
-    .pdf-disclaimer-disclaimer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 17px;
-      width: 949px;
-      height: 93px;
-    }
-    .disclaimer-divider {
-      width: 935px;
-      height: 1px;
-      background: #EEEEEE;
-    }
-    
-    .text-disclaimer {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 949px;
-      height: 75px;
-    }
-    .text-disclaimer h6 {
-        width: 949px;
-        height: 25px;
-        
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 17px;
-        line-height: 25px;
-        text-align: center;
-        letter-spacing: -0.01em;
-        color: #212429;
-    }
-    .text-disclaimer p {
-      width: 949px;
-      height: 50px;
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 25px;
-      text-align: center;
-      letter-spacing: -0.01em;
-      color: #212429;
-    }
-    .text-disclaimer h6 span{
-      font-weight: 600;
-    }
-  </style>
-  <style>
-    .pdf-marks-table {
-      display: flex;
-      flex-direction: column;
-      width: 965px;
-      height: 278px;
-    }
-    
-    .pdf-marks-table-labels {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0;
-      width: 965px;
-      height: 30px;
-    }
-    
-    .pdf-marks-table-labels-column1 {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5px 4px;
-      width: 175px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      border-bottom: 2px solid #E0E1E5;
-    }
-    .pdf-marks-table-labels-column2 {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5px 4px;
-      width: 278px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      border-bottom: 2px solid #E0E1E5;
-    }
-    .pdf-marks-table-labels-column3 {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5px;
-      width: 89px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      border-bottom: 2px solid #E0E1E5;
-    }
-    .pdf-marks-table-labels-column4 {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5px 4px;
-      width: 150px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      border-bottom: 2px solid #E0E1E5;
-    }
-    .pdf-marks-table-labels-column5 {
-      display: flex;
-      align-items: center;
-      padding: 5px 4px;
-      width: 73px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      border-bottom: 2px solid #E0E1E5;
-    }
-    .pdf-marks-table-labels-column6 {
-      display: flex;
-      align-items: center;
-      padding: 5px 4px;
-      width: 195px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      border-bottom: 2px solid #E0E1E5;
-    }
-    .marks-label-p {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 17px;
-      line-height: 20px;
-      letter-spacing: -0.012em;
-      color: #212429;
-    }
-    
-    
-    
-    .pdf-marks-table-sub {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      width: 965px;
-      height: 246px;
-    }
-    
-    .pdf-marks-table-sub-main {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0;
-      width: 965px;
-      height: 30px;
-    }
-    
-    .marks-value-text {
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 20px;
-      color: #212429;
-    }
-    
-    .main1-subcode {
-      display: flex;
-      align-items: center;
-      padding: 5px;
-      width: 175px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main1-subname {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5px 4px;
-      width: 278px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main1-subname p {
-      letter-spacing: -0.01em;
-    }
-    
-    
-    .main1-theory {
-      display: flex;
-      align-items: center;
-      padding: 5px;
-      gap: 10px;
-      width: 89px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main1-theory p {
-      letter-spacing: -0.015em;
-    }
-    
-    .main1-practical {
-      display: flex;
-      align-items: center;
-      padding: 5px 4px;
-      width: 150px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main1-practical p {
-      letter-spacing: -0.015em;
-    }
-    
-    .main1-total  {
-      display: flex;
-      align-items: center;
-      padding: 5px 4px;
-      width: 73px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main1-total p  {
-      letter-spacing: -0.015em;
-    }
-    
-    .main1-grade {
-      display: flex;
-      align-items: center;
-      padding: 5px 4px;
-      width: 195px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      letter-spacing: -0.015em;
-    }
-    
-    
-    .main2-subcode {
-        display: flex;
-        align-items: center;
-        padding: 2px 5px 7px;
-        
-        width: 175px;
-        height: 29px;
-        
-        background: rgba(255, 255, 255, 0.01);
-        border: 1px solid #E0E1E5;
-
-    }
-    .main2-subname {
-      display: flex; 
-      align-items: center;
-      padding: 2px 5px 7px;
-      width: 278px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    
-    
-    .main2-subname p,
-    .main2-grade p,
-    .main2-theory p,
-    .main2-total,
-    .main2-practical,
-    .main2-subcode p{
-      letter-spacing: -0.015em;
-    }
-    
-    
-    .main2-grade {
-      display: flex;
-      align-items: center;
-      padding: 2px 4px 7px 5px;
-      width: 195px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main2-theory {
-      display: flex;
-      align-items: center;
-      padding: 2px 5px 7px;
-      
-      width: 89px;
-      height: 29px;
-      
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main2-practical {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 2px 5px 7px;
-      width: 150px;
-      height: 29px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-    }
-    .main2-total {
-        display: flex;
-        align-items: center;
-        padding: 2px 5px 7px;
-        width: 73px;
-        height: 29px;
-        background: rgba(255, 255, 255, 0.01);
-        border: 1px solid #E0E1E5;
-    }
-    
-    
-    .additonal-label {
-      width: 135px;
-      height: 20px;
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 17px;
-      line-height: 20px;
-      letter-spacing: -0.018em;
-      color: #212429;
-    }
-    
-    .results {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 0;
-      width: 965px;
-      height: 30px;
-    }
-    
-    .results-label {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 5px;
-      width: 453px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 17px;
-      line-height: 20px;
-      color: #212429;
-    }
-    
-    .results-result {
-      display: flex;
-      align-items: center;
-      padding: 5px;
-      width: 507px;
-      height: 30px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid #E0E1E5;
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 20px;
-      letter-spacing: -0.015em;
-      color: #212429;
-    }
-    
-    .margin-neg {
-      margin-bottom: -0.5px;
-    }
-  </style>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212;
+            color: #FFF;
+        }
+        #editor {
+            height: 350px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/loader.min.js"></script>
 </head>
+
 <body>
-  <div id="pdf-capture">
-    <img class="shadow" src="./Realsheet-2.png" alt="">
-    <img class="cbse-logo" src="./image-logo-typeshit.png" alt="cbse-logo">
-    <div class="link-text-pdf">
-      <h3>https://cbseresults.nic.in</h3>
-      <h4>Examination Results 2025</h4>
-    </div>
-    
-    <div class="main-table-pdf">
-      <div class="main-pdf-content">
-        <div class="main-pdf-upper-content">
-          <div class="pdf-content-title">
-            <h2>Secondary School Examination (Class X) Results 2025</h2>
-            <div class="pdf-table-divider"></div>
-          </div>
-          <div class="pdf-student-info-table">
-            <div class="pdf-student-info-column">
-              <div class="info-column1-label">
-                <p class="info-column-label-p">Roll No :</p>
-              </div>
-              <div class="info-column1-value">
-                <p class="info-column-value-p">25139772</p>
-              </div>
-            </div>
-            <div class="pdf-student-info-column">
-              <div class="info-column2-label">
-                <p class="info-column-label-p">Candidate Name :</p>
-              </div>
-              <div class="info-column2-value">
-                <p class="info-column-value-p">SIGMA RIZZLER</p>
-              </div>
-            </div>
-            <div class="pdf-student-info-column">
-              <div class="info-column3-label">
-                <p class="info-column-label-p">Mother's Name :</p>
-              </div>
-              <div class="info-column3-value">
-                <p class="info-column-value-p">SIGMA LADY</p>
-              </div>
-            </div>
-            <div class="pdf-student-info-column4">
-              <div class="info-column4-label">
-                <p class="info-column-label-p">Father's Name :</p>
-              </div>
-              <div class="info-column4-value">
-                <p class="info-column-value-p">SIGMA THE PREDATOR</p>
-              </div>
-            </div>
-            <div class="pdf-student-info-column">
-              <div class="info-column5-label">
-                <p class="info-column-label-p">Date of Birth :</p>
-              </div>
-              <div class="info-column5-value">
-                <p class="info-column-value-p">13/08/2010</p>
-              </div>
-            </div>
-            <div class="pdf-student-info-column">
-              <div class="info-column6-label">
-                <p class="info-column-label-p">School's Name :</p>
-              </div>
-              <div class="info-column6-value">
-                <p class="info-column-value-p">BITCHLESS FOREVER PUBLIC SCHOOL |
-                ALABAMA</p>
-              </div>
-            </div>
-            
-          </div>
+
+    <div class="container">
+        <h1 class="mt-4" style="text-align: center;">Turn Your Code Into Beautiful Pictures</h1>
+
+        <div class="form-group mb-3">
+            <label for="languageSelect">Select Language:</label>
+            <select class="form-select" id="languageSelect">
+                <option value="javascript">JavaScript</option>
+                <option value="css">CSS</option>
+                <option value="html">HTML</option>
+                <option value="json">JSON</option>
+            </select>
         </div>
-        <div class="main-pdf-lower-content">
-          <div class="pdf-marks-table">
-            <div class="pdf-marks-table-labels">
-              <div class="pdf-marks-table-labels-column1">
-                <p class="marks-label-p">SUB CODE</p>
-              </div>
-              <div class="pdf-marks-table-labels-column2">
-                <p class="marks-label-p">SUB NAME</p>
-              </div>
-              <div class="pdf-marks-table-labels-column3">
-                <p class="marks-label-p">THEORY</p>
-              </div>
-              <div class="pdf-marks-table-labels-column4">
-                <p class="marks-label-p">I.A/PRACTICAL</p>
-              </div>
-              <div class="pdf-marks-table-labels-column5">
-                <p class="marks-label-p">TOTAL</p>
-              </div>
-              <div class="pdf-marks-table-labels-column6">
-                <p class="marks-label-p">POSITIONAL GRADE</p>
-              </div>
-            </div>
-            <div class="pdf-marks-table-sub">
-              <div class="pdf-marks-table-sub-main">
-                <div class="main1-subcode">
-                  <p class="marks-value-text">184</p>
-                </div>
-                <div class="main1-subname">
-                  <p class="marks-value-text">ENGLISH LNG & LIT.</p>
-                </div>
-                <div class="main1-theory">
-                  <p class="marks-value-text">073</p>
-                </div>
-                <div class="main1-practical">
-                  <p class="marks-value-text">020</p>
-                </div>
-                <div class="main1-total">
-                  <p class="marks-value-text">093</p>
-                </div>
-                <div class="main1-grade">
-                  <p class="marks-value-text">A1</p>
-                </div>
-              </div>
-              <div class="pdf-marks-table-sub-main">
-                <div class="main1-subcode">
-                  <p class="marks-value-text">002</p>
-                </div>
-                <div class="main1-subname">
-                  <p class="marks-value-text">HINDI COURSE-A</p>
-                </div>
-                <div class="main1-theory">
-                  <p class="marks-value-text">072</p>
-                </div>
-                <div class="main1-practical">
-                  <p class="marks-value-text">020</p>
-                </div>
-                <div class="main1-total">
-                  <p class="marks-value-text">092</p>
-                </div>
-                <div class="main1-grade">
-                  <p class="marks-value-text">A1</p>
-                </div>
-              </div>
-              <div class="pdf-marks-table-sub-main">
-                <div class="main1-subcode">
-                  <p class="marks-value-text">041</p>
-                </div>
-                <div class="main1-subname">
-                  <p class="marks-value-text">MATHEMATICS STANDARD</p>
-                </div>
-                <div class="main1-theory">
-                  <p class="marks-value-text">066</p>
-                </div>
-                <div class="main1-practical">
-                  <p class="marks-value-text">020</p>
-                </div>
-                <div class="main1-total">
-                  <p class="marks-value-text">086</p>
-                </div>
-                <div class="main1-grade">
-                  <p class="marks-value-text">A2</p>
-                </div>
-              </div>
-              <div class="pdf-marks-table-sub-main">
-                <div class="main2-subcode">
-                  <p class="marks-value-text">086</p>
-                </div>
-                <div class="main2-subname">
-                  <p class="marks-value-text">SCIENCE</p>
-                </div>
-                <div class="main2-theory">
-                  <p class="marks-value-text">078</p>
-                </div>
-                <div class="main2-practical">
-                  <p class="marks-value-text">020</p>
-                </div>
-                <div class="main2-total">
-                  <p class="marks-value-text">098</p>
-                </div>
-                <div class="main2-grade">
-                  <p class="marks-value-text">A1</p>
-                </div>
-              </div>
-              <div class="pdf-marks-table-sub-main">
-                <div class="main1-subcode">
-                  <p class="marks-value-text">087</p>
-                </div>
-                <div class="main1-subname">
-                  <p class="marks-value-text">SOCIAL SCIENCE</p>
-                </div>
-                <div class="main1-theory">
-                  <p class="marks-value-text">077</p>
-                </div>
-                <div class="main1-practical">
-                  <p class="marks-value-text">020</p>
-                </div>
-                <div class="main1-total">
-                  <p class="marks-value-text">097</p>
-                </div>
-                <div class="main1-grade">
-                  <p class="marks-value-text">A1</p>
-                </div>
-              </div>
-              <div class="pdf-marks-table-sub-main">
-                <div class="main1-subcode">
-                  <p class="additonal-label">Additional Subject</p>
-                </div>
-                <div class="main1-subname"></div>
-                <div class="main1-theory"></div>
-                <div class="main1-practical"></div>
-                <div class="main1-total"></div>
-                <div class="main1-grade"></div>
-              </div>
-              <div class="pdf-marks-table-sub-main">
-                <div class="main1-subcode">
-                  <p class="marks-value-text">402</p>
-                </div>
-                <div class="main1-subname">
-                  <p class="marks-value-text">INFORMATION TECHNOLOGY</p>
-                </div>
-                <div class="main1-theory">
-                  <p class="marks-value-text">046</p>
-                </div>
-                <div class="main1-practical">
-                  <p class="marks-value-text">050</p>
-                </div>
-                <div class="main1-total">
-                  <p class="marks-value-text">096</p>
-                </div>
-                <div class="main1-grade">
-                  <p class="marks-value-text">A1</p>
-                </div>
-              </div>
-              <div class="results">
-                <div class="results-label">
-                  <p>Result :</p>
-                </div>
-                <div class="results-result">
-                  <p>PASS</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pdf-disclaimer">
-            <div class="pdf-disclaimer-note">
-              <h6><span>Note :</span> Abbreviations used against Result</h6>
-              <p><span>R.L.</span> - Result Later(Your result is under
-              preparation and it will be declared soon), <span>N.E.</span> - Not Eligible,
-              <span>R.W.</span> - Result withheld, <span>ABST</span></p>
-              <p>- Absent <span>COMP</span> - Compartment, UFM - Unfairmeans,
-              <span>XXXX</span> - Improvement, <span>SJD</span> - Subjudice,
-              <span>N.R.</span> - Not Registered</p>
-            </div>
-            <div class="pdf-disclaimer-disclaimer">
-              <div class="disclaimer-divider"></div>
-              <div class="text-disclaimer">
-                <h6><span>Disclaimer :</span> Neither NIC nor CBSE is responsible for any inadvertent error that may have crept in the results being published on</h6>
-                <p>Net. The results published on net are for Immediate information to the examinees. These can not be treated as original mark sheets. Original mark sheets have been issued by the Board separately.</p>
-              </div>
-            </div>
-          </div>
+
+        <div class="form-group mb-3">
+            <label for="themeSelect">Select Theme:</label>
+            <select class="form-select" id="themeSelect">
+                <option value="vs-light">Light</option>
+                <option value="vs-dark">Dark</option>
+                <option value="hc-black">High Contrast</option>
+                <option value="dracula">Dracula</option>
+                <option value="solarized-light">Solarized Light</option>
+                <option value="solarized-dark">Solarized Dark</option>
+                <option value="github-dark">GitHub Dark</option>
+                <option value="monokai">Monokai</option>
+            </select>
         </div>
-      </div>
+
+        <div id="editor"></div>
+
+        <!-- Button to download the image -->
+        <button id="downloadBtn" class="btn btn-primary" style="margin-top: 2rem; margin-bottom: 2rem;">Download Image</button>
     </div>
+
+    <script>
+        // Load Monaco Editor using AMD
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs' } });
+        require(['vs/editor/editor.main'], function () {
+
+            // Create the editor instance
+            const editor = monaco.editor.create(document.getElementById('editor'), {
+                value: `// Write your code here\nconsole.log('Hello, Monaco!');`,
+                language: 'javascript',
+                theme: 'vs-light',
+                fontSize: '15px'
+            });
+
+            // Define themes (as before)
+            monaco.editor.defineTheme('dracula', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { token: '', background: '282a36', foreground: 'f8f8f2' },
+                    { token: 'comment', foreground: '6272a4' },
+                    { token: 'keyword', foreground: 'ff79c6' },
+                    { token: 'string', foreground: 'f1fa8c' }
+                ],
+                colors: {
+                    'editor.background': '#282a36'
+                }
+            });
     
-    <p class="lower-block-p">This site is designed, developed and hosted by National informatics Centre, Ministry of Electronics & Information Technology, Governmnnt of India.</p>
-    <div class="lower-block"></div>
-  </div>
-  <button onclick="downloadAsPDF()" style="padding:10px 20px; font-weight:bold; background:#007bff; color:#fff; border:none; border-radius:4px; margin-bottom:20px;">  
-  Download PDF  
-</button>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+            monaco.editor.defineTheme('solarized-light', {
+                base: 'vs',
+                inherit: true,
+                rules: [
+                    { token: '', foreground: '586e75', background: 'fdf6e3' },
+                    { token: 'comment', foreground: '93a1a1' },
+                    { token: 'keyword', foreground: '859900' },
+                    { token: 'string', foreground: '2aa198' }
+                ],
+                colors: {
+                    'editor.background': '#fdf6e3'
+                }
+            });
 
+            monaco.editor.defineTheme('solarized-dark', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { token: '', foreground: '839496', background: '002b36' },
+                    { token: 'comment', foreground: '586e75' },
+                    { token: 'keyword', foreground: 'cb4b16' },
+                    { token: 'string', foreground: '2aa198' }
+                ],
+                colors: {
+                    'editor.background': '#002b36'
+                }
+            });
 
-<script>
-  async function downloadAsPDF() {
-    const { jsPDF } = window.jspdf;
-    const el = document.getElementById("pdf-capture");
-    
-    window.scrollTo(0, 0); // Ensure nothing’s cut
-    const canvas = await html2canvas(el, {
-      scale: 2,
-      useCORS: true
-    });
+            monaco.editor.defineTheme('github-dark', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { token: '', foreground: 'c9d1d9', background: '0d1117' },
+                    { token: 'comment', foreground: '8b949e' },
+                    { token: 'keyword', foreground: 'ff7b72' },
+                    { token: 'string', foreground: 'a5d6ff' }
+                ],
+                colors: {
+                    'editor.background': '#0d1117'
+                }
+            });
 
-    const imgData = canvas.toDataURL("image/jpeg", 1.0);
-    const pdf = new jsPDF("p", "mm", "a4");
-    const width = pdf.internal.pageSize.getWidth();
-    const height = (canvas.height * width) / canvas.width;
+            monaco.editor.defineTheme('monokai', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { token: '', foreground: 'f8f8f2', background: '272822' },
+                    { token: 'comment', foreground: '75715e' },
+                    { token: 'keyword', foreground: 'f92672' },
+                    { token: 'string', foreground: 'a6e22e' }
+                ],
+                colors: {
+                    'editor.background': '#272822'
+                }
+            });
 
-    pdf.addImage(imgData, "JPEG", 0, 0, width, height);
-    pdf.save("cbse-result.pdf");
-  }
-  </script>
+            // Change language based on selection
+            document.getElementById('languageSelect').addEventListener('change', function () {
+                const newLanguage = this.value;
+                monaco.editor.setModelLanguage(editor.getModel(), newLanguage);
+            });
+
+            // Change theme based on selection
+            document.getElementById('themeSelect').addEventListener('change', function () {
+                const newTheme = this.value;
+                monaco.editor.setTheme(newTheme);
+            });
+
+            // Add event listener for the download button
+            document.getElementById('downloadBtn').addEventListener('click', function () {
+                html2canvas(document.querySelector('#editor')).then(function (canvas) {
+                    const image = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = image;
+                    link.download = 'editor-screenshot.png';
+                    link.click();
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </body>
+
 </html>
